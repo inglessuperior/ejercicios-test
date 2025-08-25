@@ -10,6 +10,9 @@
             line-height: 1.6;
             margin: 20px;
             color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
         }
         h1 {
             color: #2c3e50;
@@ -37,6 +40,7 @@
             color: white;
             border: none;
             cursor: pointer;
+            padding: 8px 15px;
         }
         button:hover {
             background-color: #2980b9;
@@ -49,11 +53,13 @@
             color: red;
             font-weight: bold;
         }
-        #drag-area {
-            min-height: 50px;
+        #drop-area {
+            min-height: 20px;
             border: 2px dashed #ccc;
-            padding: 10px;
-            margin: 10px 0;
+            padding: 5px 10px;
+            margin: 5px;
+            display: inline-block;
+            min-width: 50px;
             text-align: center;
         }
         .draggable {
@@ -62,6 +68,15 @@
             margin: 5px;
             cursor: move;
             display: inline-block;
+            border: 1px solid #b3e5fc;
+            border-radius: 3px;
+        }
+        #drag-area {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            background-color: #f5f5f5;
         }
     </style>
 </head>
@@ -109,10 +124,10 @@
         <p id="resultado3"></p>
     </div>
 
-    <!-- Ejercicio 4: Arrastra y suelta (afirmaciones/negaciones) -->
+    <!-- Ejercicio 4: Arrastra y suelta -->
     <div class="ejercicio">
         <div class="pregunta">4. Arrastra la palabra correcta para completar la oración:<br>
-        I <span id="drop-area" style="border: 1px dashed #ccc; padding: 5px; display: inline-block; min-width: 50px;"></span> happy.
+        I <span id="drop-area" ondragover="allowDrop(event)" ondrop="drop(event)">[Suelta aquí]</span> happy.
         <div id="drag-area">
             <span class="draggable" draggable="true" ondragstart="drag(event)">am</span>
             <span class="draggable" draggable="true" ondragstart="drag(event)">is</span>
@@ -147,7 +162,7 @@
 
         // Ejercicio 2: Campo de texto
         function verificarEjercicio2() {
-            const respuesta = document.getElementById("ejercicio2").value.toLowerCase();
+            const respuesta = document.getElementById("ejercicio2").value.toLowerCase().trim();
             const resultado = document.getElementById("resultado2");
             if (respuesta === "are") {
                 resultado.innerHTML = "✅ Correcto: 'We <strong>are</strong> students.'";
@@ -178,9 +193,9 @@
             }
         }
 
-        // Ejercicio 4: Arrastra y suelta
+        // Funciones para arrastrar y soltar
         function allowDrop(ev) {
-            ev.preventDefault();
+            ev.preventDefault(); // Permite soltar
         }
 
         function drag(ev) {
@@ -193,9 +208,10 @@
             ev.target.innerHTML = data;
         }
 
+        // Ejercicio 4: Arrastra y suelta
         function verificarEjercicio4() {
             const dropArea = document.getElementById("drop-area");
-            const respuesta = dropArea.innerHTML;
+            const respuesta = dropArea.innerHTML.replace("[Suelta aquí]", "").trim();
             const resultado = document.getElementById("resultado4");
             if (respuesta === "am") {
                 resultado.innerHTML = "✅ Correcto: 'I <strong>am</strong> happy.'";
@@ -208,7 +224,7 @@
 
         // Ejercicio 5: Negaciones
         function verificarEjercicio5() {
-            const respuesta = document.getElementById("ejercicio5").value.toLowerCase();
+            const respuesta = document.getElementById("ejercicio5").value.toLowerCase().trim();
             const resultado = document.getElementById("resultado5");
             if (respuesta === "are not" || respuesta === "aren't") {
                 resultado.innerHTML = "✅ Correcto: 'They <strong>are not</strong> teachers.'";
