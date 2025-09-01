@@ -3,193 +3,220 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejercicios del Verbo 'To Be'</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Ejercicios: Verbo "To Be" (am/is/are)</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f0f4f8;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            color: #333;
         }
-        .container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 24px;
-            background-color: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        h1 {
+            color: #2c3e50;
+            text-align: center;
         }
-        .exercise-section {
-            background-color: #e2e8f0;
-            padding: 24px;
+        .ejercicio {
+            background-color: #f9f9f9;
             border-radius: 8px;
-            margin-bottom: 24px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
         }
-        .correct {
-            color: #16a34a; /* verde oscuro */
+        .pregunta {
+            font-weight: bold;
+            margin-bottom: 10px;
         }
-        .incorrect {
-            color: #dc2626; /* rojo */
+        input, select, button {
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .correcto {
+            color: green;
+            font-weight: bold;
+        }
+        .incorrecto {
+            color: red;
+            font-weight: bold;
+        }
+        #drag-area {
+            min-height: 50px;
+            border: 2px dashed #ccc;
+            padding: 10px;
+            margin: 10px 0;
+            text-align: center;
+        }
+        .draggable {
+            background-color: #e1f5fe;
+            padding: 5px 10px;
+            margin: 5px;
+            cursor: move;
+            display: inline-block;
         }
     </style>
 </head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+<body>
+    <h1>Ejercicios: Verbo "To Be" (am/is/are)</h1>
 
-    <div class="container">
-        <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Verbo 'To Be' Ejercicios</h1>
-        <p class="text-center text-gray-600 mb-8">Completa las siguientes oraciones con la forma correcta del verbo 'to be'.</p>
-
-        <!-- Sección 1: Selección Múltiple (Dropdown) -->
-        <div id="section-1" class="exercise-section">
-            <h2 class="text-xl font-semibold text-gray-700 mb-4">Sección 1: Selección Múltiple</h2>
-            
-            <form id="dropdown-form" class="space-y-4">
-                <div class="flex items-center space-x-2">
-                    <p class="text-gray-700">1. He <select id="q1" class="p-2 border rounded-md">
-                        <option value="">...</option>
-                        <option value="is">is</option>
-                        <option value="am">am</option>
-                        <option value="are">are</option>
-                    </select> a student. <span id="q1-result" class="ml-2 font-bold"></span></p>
-                </div>
-                <div class="flex items-center space-x-2">
-                    <p class="text-gray-700">2. They <select id="q2" class="p-2 border rounded-md">
-                        <option value="">...</option>
-                        <option value="is">is</option>
-                        <option value="am">am</option>
-                        <option value="are">are</option>
-                    </select> friends. <span id="q2-result" class="ml-2 font-bold"></span></p>
-                </div>
-                <div class="flex items-center space-x-2">
-                    <p class="text-gray-700">3. I <select id="q3" class="p-2 border rounded-md">
-                        <option value="">...</option>
-                        <option value="is">is</option>
-                        <option value="am">am</option>
-                        <option value="are">are</option>
-                    </select> happy. <span id="q3-result" class="ml-2 font-bold"></span></p>
-                </div>
-                <div class="flex items-center space-x-2">
-                    <p class="text-gray-700">4. She <select id="q4" class="p-2 border rounded-md">
-                        <option value="">...</option>
-                        <option value="is">is</option>
-                        <option value="am">am</option>
-                        <option value="are">are</option>
-                    </select> from Spain. <span id="q4-result" class="ml-2 font-bold"></span></p>
-                </div>
-                <div class="flex items-center space-x-2">
-                    <p class="text-gray-700">5. We <select id="q5" class="p-2 border rounded-md">
-                        <option value="">...</option>
-                        <option value="is">is</option>
-                        <option value="am">am</option>
-                        <option value="are">are</option>
-                    </select> in the park. <span id="q5-result" class="ml-2 font-bold"></span></p>
-                </div>
-                <button type="button" onclick="checkDropdownAnswers()" class="mt-4 w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded-md shadow-md hover:bg-blue-600 transition duration-300">Verificar Respuestas</button>
-            </form>
-            <div id="dropdown-results" class="mt-4 text-center text-lg font-semibold"></div>
-        </div>
-
-        <!-- Sección 2: Escribir la respuesta -->
-        <div id="section-2" class="exercise-section">
-            <h2 class="text-xl font-semibold text-gray-700 mb-4">Sección 2: Escribe la Respuesta</h2>
-            
-            <form id="text-form" class="space-y-4">
-                <div class="flex items-center space-x-2">
-                    <p class="text-gray-700">1. The cat <input type="text" id="q6" class="p-2 border rounded-md w-24"> black. <span id="q6-result" class="ml-2 font-bold"></span></p>
-                </div>
-                <div class="flex items-center space-x-2">
-                    <p class="text-gray-700">2. My parents <input type="text" id="q7" class="p-2 border rounded-md w-24"> doctors. <span id="q7-result" class="ml-2 font-bold"></span></p>
-                </div>
-                <div class="flex items-center space-x-2">
-                    <p class="text-gray-700">3. It <input type="text" id="q8" class="p-2 border rounded-md w-24"> a beautiful day. <span id="q8-result" class="ml-2 font-bold"></span></p>
-                </div>
-                <div class="flex items-center space-x-2">
-                    <p class="text-gray-700">4. You <input type="text" id="q9" class="p-2 border rounded-md w-24"> my best friend. <span id="q9-result" class="ml-2 font-bold"></span></p>
-                </div>
-                <div class="flex items-center space-x-2">
-                    <p class="text-gray-700">5. The books <input type="text" id="q10" class="p-2 border rounded-md w-24"> on the table. <span id="q10-result" class="ml-2 font-bold"></span></p>
-                </div>
-                <button type="button" onclick="checkTextAnswers()" class="mt-4 w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded-md shadow-md hover:bg-blue-600 transition duration-300">Verificar Respuestas</button>
-            </form>
-            <div id="text-results" class="mt-4 text-center text-lg font-semibold"></div>
+    <!-- Ejercicio 1: Dropdown menu -->
+    <div class="ejercicio">
+        <div class="pregunta">1. Selecciona la forma correcta del verbo "to be":<br>
+        She ___ from Spain.
+        <select id="ejercicio1">
+            <option value="">-- Selecciona --</option>
+            <option value="am">am</option>
+            <option value="is">is</option>
+            <option value="are">are</option>
+        </select>
+        <button onclick="verificarEjercicio1()">Verificar</button>
+        <p id="resultado1"></p>
         </div>
     </div>
 
+    <!-- Ejercicio 2: Campo de texto -->
+    <div class="ejercicio">
+        <div class="pregunta">2. Completa la oración:<br>
+        We ___ students.
+        <input type="text" id="ejercicio2" placeholder="Escribe la respuesta">
+        <button onclick="verificarEjercicio2()">Verificar</button>
+        <p id="resultado2"></p>
+        </div>
+    </div>
+
+    <!-- Ejercicio 3: Multiple choice -->
+    <div class="ejercicio">
+        <div class="pregunta">3. Elige la opción correcta:<br>
+        ___ you ready?
+        <div>
+            <input type="radio" id="opcion3a" name="ejercicio3" value="am">
+            <label for="opcion3a">am</label><br>
+            <input type="radio" id="opcion3b" name="ejercicio3" value="is">
+            <label for="opcion3b">is</label><br>
+            <input type="radio" id="opcion3c" name="ejercicio3" value="are">
+            <label for="opcion3c">are</label>
+        </div>
+        <button onclick="verificarEjercicio3()">Verificar</button>
+        <p id="resultado3"></p>
+    </div>
+
+    <!-- Ejercicio 4: Arrastra y suelta (afirmaciones/negaciones) -->
+    <div class="ejercicio">
+        <div class="pregunta">4. Arrastra la palabra correcta para completar la oración:<br>
+        I <span id="drop-area" style="border: 1px dashed #ccc; padding: 5px; display: inline-block; min-width: 50px;"></span> happy.
+        <div id="drag-area">
+            <span class="draggable" draggable="true" ondragstart="drag(event)">am</span>
+            <span class="draggable" draggable="true" ondragstart="drag(event)">is</span>
+            <span class="draggable" draggable="true" ondragstart="drag(event)">are</span>
+        </div>
+        <button onclick="verificarEjercicio4()">Verificar</button>
+        <p id="resultado4"></p>
+    </div>
+
+    <!-- Ejercicio 5: Negaciones -->
+    <div class="ejercicio">
+        <div class="pregunta">5. Escribe la forma negativa de la oración:<br>
+        They are teachers. → They ___ teachers.
+        <input type="text" id="ejercicio5" placeholder="Ej: are not">
+        <button onclick="verificarEjercicio5()">Verificar</button>
+        <p id="resultado5"></p>
+    </div>
+
     <script>
-        // Función para verificar las respuestas de la sección de dropdown
-        function checkDropdownAnswers() {
-            const answers = {
-                q1: "is",
-                q2: "are",
-                q3: "am",
-                q4: "is",
-                q5: "are"
-            };
-            let correctCount = 0;
-            let totalQuestions = 0;
-            const form = document.getElementById('dropdown-form');
-            const resultDiv = document.getElementById('dropdown-results');
-
-            for (const key in answers) {
-                totalQuestions++;
-                const selectedValue = document.getElementById(key).value;
-                const pTag = document.getElementById(key).parentElement;
-                const resultSpan = document.getElementById(key + '-result');
-                
-                // Eliminar clases y contenido de resultado anteriores
-                pTag.classList.remove('correct', 'incorrect');
-                resultSpan.textContent = '';
-
-                if (selectedValue === answers[key]) {
-                    correctCount++;
-                    pTag.classList.add('correct');
-                    resultSpan.textContent = '✅';
-                } else {
-                    pTag.classList.add('incorrect');
-                    resultSpan.textContent = '❌';
-                }
+        // Ejercicio 1: Dropdown
+        function verificarEjercicio1() {
+            const respuesta = document.getElementById("ejercicio1").value;
+            const resultado = document.getElementById("resultado1");
+            if (respuesta === "is") {
+                resultado.innerHTML = "✅ Correcto: 'She <strong>is</strong> from Spain.'";
+                resultado.className = "correcto";
+            } else {
+                resultado.innerHTML = "❌ Incorrecto. La respuesta correcta es 'is'.";
+                resultado.className = "incorrecto";
             }
-            
-            resultDiv.textContent = `Correctas: ${correctCount} de ${totalQuestions}`;
-            resultDiv.classList.add(correctCount === totalQuestions ? 'correct' : 'incorrect');
         }
 
-        // Función para verificar las respuestas de la sección de texto
-        function checkTextAnswers() {
-            const answers = {
-                q6: "is",
-                q7: "are",
-                q8: "is",
-                q9: "are",
-                q10: "are"
-            };
-            let correctCount = 0;
-            let totalQuestions = 0;
-            const form = document.getElementById('text-form');
-            const resultDiv = document.getElementById('text-results');
+        // Ejercicio 2: Campo de texto
+        function verificarEjercicio2() {
+            const respuesta = document.getElementById("ejercicio2").value.toLowerCase();
+            const resultado = document.getElementById("resultado2");
+            if (respuesta === "are") {
+                resultado.innerHTML = "✅ Correcto: 'We <strong>are</strong> students.'";
+                resultado.className = "correcto";
+            } else {
+                resultado.innerHTML = "❌ Incorrecto. La respuesta correcta es 'are'.";
+                resultado.className = "incorrecto";
+            }
+        }
 
-            for (const key in answers) {
-                totalQuestions++;
-                const inputValue = document.getElementById(key).value.trim().toLowerCase();
-                const pTag = document.getElementById(key).parentElement;
-                const resultSpan = document.getElementById(key + '-result');
-
-                // Eliminar clases y contenido de resultado anteriores
-                pTag.classList.remove('correct', 'incorrect');
-                resultSpan.textContent = '';
-                
-                if (inputValue === answers[key]) {
-                    correctCount++;
-                    pTag.classList.add('correct');
-                    resultSpan.textContent = '✅';
-                } else {
-                    pTag.classList.add('incorrect');
-                    resultSpan.textContent = '❌';
+        // Ejercicio 3: Multiple choice
+        function verificarEjercicio3() {
+            const opciones = document.getElementsByName("ejercicio3");
+            let respuesta = "";
+            for (const opcion of opciones) {
+                if (opcion.checked) {
+                    respuesta = opcion.value;
+                    break;
                 }
             }
-            
-            resultDiv.textContent = `Correctas: ${correctCount} de ${totalQuestions}`;
-            resultDiv.classList.add(correctCount === totalQuestions ? 'correct' : 'incorrect');
+            const resultado = document.getElementById("resultado3");
+            if (respuesta === "are") {
+                resultado.innerHTML = "✅ Correcto: '<strong>Are</strong> you ready?'";
+                resultado.className = "correcto";
+            } else {
+                resultado.innerHTML = "❌ Incorrecto. La respuesta correcta es 'are'.";
+                resultado.className = "incorrecto";
+            }
+        }
+
+        // Ejercicio 4: Arrastra y suelta
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drag(ev) {
+            ev.dataTransfer.setData("text", ev.target.innerHTML);
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            const data = ev.dataTransfer.getData("text");
+            ev.target.innerHTML = data;
+        }
+
+        function verificarEjercicio4() {
+            const dropArea = document.getElementById("drop-area");
+            const respuesta = dropArea.innerHTML;
+            const resultado = document.getElementById("resultado4");
+            if (respuesta === "am") {
+                resultado.innerHTML = "✅ Correcto: 'I <strong>am</strong> happy.'";
+                resultado.className = "correcto";
+            } else {
+                resultado.innerHTML = "❌ Incorrecto. La respuesta correcta es 'am'.";
+                resultado.className = "incorrecto";
+            }
+        }
+
+        // Ejercicio 5: Negaciones
+        function verificarEjercicio5() {
+            const respuesta = document.getElementById("ejercicio5").value.toLowerCase();
+            const resultado = document.getElementById("resultado5");
+            if (respuesta === "are not" || respuesta === "aren't") {
+                resultado.innerHTML = "✅ Correcto: 'They <strong>are not</strong> teachers.'";
+                resultado.className = "correcto";
+            } else {
+                resultado.innerHTML = "❌ Incorrecto. La respuesta correcta es 'are not' o 'aren't'.";
+                resultado.className = "incorrecto";
+            }
         }
     </script>
 </body>
