@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Present Simple - Exercise</title>
+
+    <!-- Importa la fuente Inter de Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Importa el script de Tailwind CSS para el diseño -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        /* Estilos globales base con paleta opaca / suave */
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #334155;
+            margin: 0;
+            padding: 24px 20px;
+            background-color: #f1f5f9;
+        }
+
+        /* Estilos base para secciones (espaciado estándar) */
+        section {
+            margin-bottom: 24px;
+        }
+
+        /* Clase para fórmulas gramaticales idéntica al archivo de referencia */
+        .formula {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            padding: 16px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+
+        .titulo1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #2563eb;
+            line-height: 1.25;
+        }
+
+        .titulo2 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .text-container {
+            flex: 1;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+            padding: 32px;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Línea para completar uniforme */
+        .blank-line {
+            display: inline-block;
+            min-width: 90px;
+            border-bottom: 2px solid #94a3b8;
+            margin: 0 6px;
+            vertical-align: bottom;
+            text-align: center;
+        }
+
+        /* Estilos específicos del Ejercicio Interactivo */
+        .question-item {
+            padding: 24px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .question-item:last-child {
+            border-bottom: none;
+        }
+
+        .option-btn {
+            display: inline-block;
+            padding: 8px 18px;
+            margin: 6px 8px 6px 0;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            background-color: #f8fafc;
+            color: #334155;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .option-btn:hover {
+            background-color: #e2e8f0;
+        }
+
+        /* Estado seleccionado */
+        .option-btn.selected {
+            border: 1px solid #2563eb;
+            background-color: #dbeafe;
+            color: #1e40af;
+            box-shadow: 0 0 0 1px #2563eb;
+        }
+
+        /* Opción 3: Verde Árbol / Bosque Claro */
+        .option-btn.correct {
+            background-color: #d1e7dd !important;
+            border-color: #a3cfbb !important;
+            color: #0f5132 !important;
+            box-shadow: none !important;
+        }
+
+        .option-btn.incorrect {
+            background-color: #fee2e2 !important;
+            border-color: #ef4444 !important;
+            color: #991b1b !important;
+            box-shadow: none !important;
+        }
+
+        .feedback-text {
+            font-size: 0.95rem;
+            margin-top: 12px;
+            padding: 12px;
+            border-radius: 6px;
+            display: none;
+        }
+
+        .feedback-text.show-correct {
+            display: block;
+            background-color: #d1e7dd;
+            color: #0f5132;
+            border-left: 4px solid #a3cfbb;
+        }
+
+        .feedback-text.show-incorrect {
+            display: block;
+            background-color: #fee2e2;
+            color: #991b1b;
+            border-left: 4px solid #ef4444;
+        }
+
+        /* Adaptabilidad para pantallas móviles */
+        @media (max-width: 640px) {
+            body {
+                padding: 12px 10px;
+            }
+            .text-container {
+                padding: 20px;
+            }
+            .option-btn {
+                display: block;
+                width: 100%;
+                margin: 8px 0;
+                text-align: center;
+            }
+            .titulo1 {
+                font-size: 2.25rem;
+            }
+            section {
+                margin-bottom: 20px;
+            }
+        }
+
+        @media print {
+            body {
+                font-size: 11pt;
+                background-color: white !important;
+                color: black !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .titulo1 { font-size: 18pt; }
+            .titulo2 { font-size: 14pt; }
+            .check-btn-container { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="max-w-4xl mx-auto text-center">
+    <img src="https://i.imgur.com/7BHucwa.png" class="imagen1" alt="Logo de Inglés Superior" style="display: block; margin: 1rem auto;">
+    <p class="formula mx-auto p-0" style="width: 30%">MÓDULO: 10</p>
+    <h1 class="titulo1 mt-2 mb-8">Present Simple: Form & Use</h1>
+</header>
+
+<main class="max-w-4xl mx-auto">
+
+    <!-- Cuadro independiente para Instrucciones -->
+    <section class="mb-6">
+        <div class="text-container">
+            <h2 class="titulo2 mb-4">Choose the correct option</h2>
+            <p class="text-slate-600">Select the correct option to complete each sentence.</p>
+        </div>
+    </section>
+
+    <!-- Contenedor para el resultado superior -->
+    <section id="results-section" class="hidden my-12">
+        <div id="results-card" class="text-container text-center border-0 shadow-lg bg-white space-y-3">
+            <div id="score-emoji" class="text-4xl">🚀</div>
+            <h2 class="titulo2 text-slate-800">Test completed!</h2>
+            <p id="score-text-container" class="text-xl font-bold text-blue-600">Correct answers: <span id="score-text">0/10</span></p>
+            <p id="score-percentage-container" class="text-xl font-bold text-blue-600">Your score is <span id="score-percentage">0%</span></p>
+        </div>
+    </section>
+
+    <!-- Cuadro independiente para el Cuestionario -->
+    <section class="mb-6">
+        <div class="text-container">
+
+            <form id="quiz-form">
+                
+                <!-- Pregunta 1 -->
+                <div class="question-item" data-correct="works" data-explanation="In positive sentences with 'he', 'she', or 'it', we add -s or -es to the base verb (she works).">
+                    <p class="font-medium text-lg mb-3">1. She <span class="blank-line"></span> in a hospital on weekends.</p>
+                    <div class="options-container">
+                        <button type="button" class="option-btn" onclick="selectOption(this)">work</button>
+                        <button type="button" class="option-btn" onclick="selectOption(this)">works</button>
+                        <button type="button" class="option-btn" onclick="selectOption(this)">working</button>
+                    </div>
+                    <div class="feedback-text"></div>
+                </div>
+
+                <!-- Pregunta 2 -->
+                <div class="question-item" data-correct="don't" data-explanation="We use 'don't' (do not) for negative sentences with 'I', 'you', 'we', and 'they'.">
+                    <p class="font-medium text-lg mb-3">2. They <span class="blank-line"></span> like coffee in the morning.</p>
+                    <div class="options-container">
+                        <button type="button" class="option-btn" onclick="selectOption(this)">don't</button>
+                        <button type="button" class="option-btn" onclick="selectOption(this)">doesn't</button>
+                        <button type="button" class="option-btn" onclick="selectOption(this)">not</button>
+                    </div>
+                    <div class="feedback-text"></div>
+                </div>
+
+                <!-- Pregunta 3 -->
+                <div class="question-item" data-correct="Does" data-explanation="We use 'Does' to start questions with third-person singular subjects ('your brother' = 'he').">
+                    <p class="font-medium text-lg mb-3">3. <span class="blank-line"></span> your brother live in London?</p>
+                    <div class="options-container">
+                        <button type="button" class="option-btn" onclick="selectOption(this)">Do</button>
+                        <button type="button" class="option-btn" onclick="selectOption(this)">Is</button>
+                        <button type="button" class="option-btn" onclick="selectOption(this)">Does</button>
+                    </div>
+                    <div class="feedback-text"></div>
+                </div>
+
+                <!-- Pregunta 4 -->
+                <div class="question-item" data-correct="teaches" data-explanation="Verbs ending in -ch add -es in the third person singular (teach → teaches).">
+                    <p class="font-medium text-lg mb-3">4. My English teacher <span class="blank-line"></span> grammar very clearly.</p>
+                    <div class="options-container">
+                        <button type="button" class="option-btn" onclick="selectOption(this)">teach</button>
+                        <button type="button" class="option-btn" onclick="selectOption(this)">teaches</button>
+                        <button type="button" class="option-btn" onclick="selectOption(this)">teachies</button>
+                    </div>
+                    <div class="feedback-text"></div>
+                </div>
+
+                <!-- Pregunta 5 -->
+                <div class="question-item" data-correct="speak" data-explanation="After 'doesn't', the main verb returns to its base form without -s (he doesn't speak).">
+                    <p class="font-medium text-lg mb-3">5. He doesn't <span class="blank-line"></span> French very well.</p>
+                    <div class="options-container">
+                        <button type="button" class="option-btn" onclick="selectOption(this)">speak</button>
+                        <button type="button" class="option-btn" onclick="selectOption(this)">speaks</button>
+                        <button type="button" class="option-btn" onclick="selectOption(this)">speaking</button>
+                    </div>
+                    <div class="feedback-text"></div>
+                </div>
+
+                <!-- Pregunta 6 -->
+                <div class="question-item" data-correct="do" data-explanation="Questions with 'you' use the auxiliary verb 'do' (Where do you...?).">
+                    <p class="font-medium text-lg mb-3">6. Where <span class="blank-line"></span> you usually buy your groceries?</p>
+                    <div class="options-container">
+                        <button type="button" class="option-btn" onclick="selectOption(this)">does</button>
+                        <button type="button" class="option-btn" onclick="selectOption(this)">do</button>
+                        <button type="button" class="option-btn" onclick="selectOption(this)">are</button>
+                    </div>
+                    <div class="feedback-text"></div>
+                </div>
+
+                <!-- Pregunta 7 -->
+                <div class="question-item" data-correct="studies" data-explanation="Verbs ending in a consonant + -y change the -y to -ies for 'he/she/it' (study → studies).">
+                    <p class="font-medium text-lg mb-3">7. Alex <span class="blank-line"></span> every night before going to sleep.</p>
+                    <div class="options-container">
+                        <button type="button" class="option-btn" onclick="selectOption(this)">study</button>
+                        <button type="button" class="option-btn" onclick="selectOption(this)">studys</button>
+                        <button type="button" class="option-btn" onclick="selectOption(this)">studies</button>
+                    </div>
+                    <div class="feedback-text"></div>
+                </div>
+
+                <!-- Pregunta 8 -->
+                <div class="question-item" data-correct="doesn't rain" data-explanation="Use 'doesn't' for 'it', followed by the base verb 'rain' (without -s).">
+                    <p class="font-medium text-lg mb-3">8. It <span class="blank-line"></span> very often in summer.</p>
+                    <div class="options-container">
+                        <button type="button" class="option-btn" onclick="selectOption(this)">don't rain</button>
+                        <button type="button" class="option-btn" onclick="selectOption(this)">doesn't rains</button>
+                        <button type="button" class="option-btn" onclick="selectOption(this)">doesn't rain</button>
+                    </div>
+                    <div class="feedback-text"></div>
+                </div>
+
+                <!-- Pregunta 9 -->
+                <div class="question-item" data-correct="start" data-explanation="In questions with 'Do/Does', the main verb must always be in base form (Does the movie start...?).">
+                    <p class="font-medium text-lg mb-3">9. What time does the movie <span class="blank-line"></span> tonight?</p>
+                    <div class="options-container">
+                        <button type="button" class="option-btn" onclick="selectOption(this)">start</button>
+                        <button type="button" class="option-btn" onclick="selectOption(this)">starts</button>
+                        <button type="button" class="option-btn" onclick="selectOption(this)">starting</button>
+                    </div>
+                    <div class="feedback-text"></div>
+                </div>
+
+                <!-- Pregunta 10 -->
+                <div class="question-item" data-correct="play" data-explanation="For plural subjects like 'My parents' ('they'), use the base verb without adding -s.">
+                    <p class="font-medium text-lg mb-3">10. My parents <span class="blank-line"></span> tennis every Sunday afternoon.</p>
+                    <div class="options-container">
+                        <button type="button" class="option-btn" onclick="selectOption(this)">plays</button>
+                        <button type="button" class="option-btn" onclick="selectOption(this)">play</button>
+                        <button type="button" class="option-btn" onclick="selectOption(this)">playing</button>
+                    </div>
+                    <div class="feedback-text"></div>
+                </div>
+
+                <!-- Botones de Acción -->
+                <div class="check-btn-container mt-10 text-center">
+                    <button type="button" onclick="checkAnswers()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg shadow transition duration-200">
+                        Check Answers
+                    </button>
+                    <button type="button" onclick="resetQuiz()" class="ml-4 bg-slate-500 hover:bg-slate-600 text-white font-bold py-3 px-6 rounded-lg shadow transition duration-200">
+                        Reset
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+    </section>
+
+</main>
+
+<script>
+    function selectOption(button) {
+        const parent = button.parentElement;
+        const buttons = parent.querySelectorAll('.option-btn');
+        
+        buttons.forEach(btn => btn.classList.remove('selected'));
+        button.classList.add('selected');
+    }
+
+    function checkAnswers() {
+        const questions = document.querySelectorAll('.question-item');
+        let totalCorrect = 0;
+
+        questions.forEach(q => {
+            const correctAnswer = q.getAttribute('data-correct');
+            const explanation = q.getAttribute('data-explanation');
+            const selectedBtn = q.querySelector('.option-btn.selected');
+            const feedback = q.querySelector('.feedback-text');
+            const allBtns = q.querySelectorAll('.option-btn');
+
+            allBtns.forEach(btn => btn.classList.remove('correct', 'incorrect'));
+            feedback.className = 'feedback-text';
+
+            if (selectedBtn) {
+                const selectedValue = selectedBtn.innerText.trim();
+                
+                if (selectedValue === correctAnswer) {
+                    selectedBtn.classList.add('correct');
+                    feedback.innerHTML = `<strong>Correct!</strong> Well done.<br><span class="text-sm mt-1 block"><strong>Why?</strong> ${explanation}</span>`;
+                    feedback.classList.add('show-correct');
+                    totalCorrect++;
+                } else {
+                    selectedBtn.classList.add('incorrect');
+                    
+                    allBtns.forEach(btn => {
+                        if (btn.innerText.trim() === correctAnswer) {
+                            btn.classList.add('correct');
+                        }
+                    });
+                    
+                    feedback.innerHTML = `<strong>Incorrect.</strong> The correct answer is <strong>"${correctAnswer}"</strong>.<br><span class="text-sm mt-1 block"><strong>Why?</strong> ${explanation}</span>`;
+                    feedback.classList.add('show-incorrect');
+                }
+            } else {
+                feedback.innerHTML = `<strong>Not answered.</strong> The correct answer is <strong>"${correctAnswer}"</strong>.<br><span class="text-sm mt-1 block"><strong>Why?</strong> ${explanation}</span>`;
+                feedback.classList.add('show-incorrect');
+            }
+        });
+
+        // Actualizar datos del cuadro de resultados superior
+        const totalQuestions = questions.length;
+        const percentage = Math.round((totalCorrect / totalQuestions) * 100);
+
+        document.getElementById('score-text').innerText = `${totalCorrect}/${totalQuestions}`;
+        document.getElementById('score-percentage').innerText = `${percentage}%`;
+
+        // Selección dinámica de emoticones y diseño del recuadro
+        const emojiDisplay = document.getElementById('score-emoji');
+        const resultsCard = document.getElementById('results-card');
+        const scorePercentageContainer = document.getElementById('score-percentage-container');
+        const scoreTextContainer = document.getElementById('score-text-container');
+
+        if (percentage === 100) {
+            emojiDisplay.innerText = '🏆';
+            emojiDisplay.className = 'text-6xl my-4';
+            resultsCard.className = 'text-container text-center border-0 shadow-lg bg-amber-100 space-y-3';
+            scoreTextContainer.className = 'text-xl font-bold text-amber-700';
+            scorePercentageContainer.className = 'text-xl font-bold text-amber-700';
+        } else if (percentage >= 80) {
+            emojiDisplay.innerText = '🎉';
+            emojiDisplay.className = 'text-4xl';
+            resultsCard.className = 'text-container text-center border-0 shadow-md bg-white space-y-3';
+            scoreTextContainer.className = 'text-xl font-bold text-blue-600';
+            scorePercentageContainer.className = 'text-xl font-bold text-blue-600';
+        } else if (percentage >= 50) {
+            emojiDisplay.innerText = '🚀';
+            emojiDisplay.className = 'text-4xl';
+            resultsCard.className = 'text-container text-center border-0 shadow-md bg-white space-y-3';
+            scoreTextContainer.className = 'text-xl font-bold text-blue-600';
+            scorePercentageContainer.className = 'text-xl font-bold text-blue-600';
+        } else {
+            emojiDisplay.innerText = '📚';
+            emojiDisplay.className = 'text-4xl';
+            resultsCard.className = 'text-container text-center border-0 shadow-md bg-white space-y-3';
+            scoreTextContainer.className = 'text-xl font-bold text-slate-600';
+            scorePercentageContainer.className = 'text-xl font-bold text-slate-600';
+        }
+
+        // Mostrar la sección de resultados
+        const resultsSection = document.getElementById('results-section');
+        resultsSection.classList.remove('hidden');
+
+        // Desplazamiento suave deteniéndose en el margen superior del recuadro
+        const yOffset = -40;
+        const targetPosition = resultsSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+        window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+        });
+    }
+
+    function resetQuiz() {
+        const buttons = document.querySelectorAll('.option-btn');
+        buttons.forEach(btn => btn.classList.remove('selected', 'correct', 'incorrect'));
+
+        const feedbacks = document.querySelectorAll('.feedback-text');
+        feedbacks.forEach(fb => {
+            fb.innerHTML = '';
+            fb.className = 'feedback-text';
+        });
+
+        // Ocultar la sección de resultados al reiniciar
+        const resultsSection = document.getElementById('results-section');
+        resultsSection.classList.add('hidden');
+    }
+</script>
+
+</body>
+</html>
