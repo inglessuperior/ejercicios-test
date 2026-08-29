@@ -1,0 +1,1027 @@
+/* =================================================================
+   ESTILOS PARA SITIO WEB - Inglés Superior
+   Paleta: 
+   - Amarillo fuerte (#facc10) → Énfasis, botones, hovers
+   - Amarillo claro (#fde68a) → Fondos, hover de links del header
+   - Gris casi negro (#1e293b) → Textos principales, títulos
+   - Gris medio (#475569) → Textos secundarios, descripciones
+   - Blanco (#ffffff) → Textos sobre fondo oscuro
+   ================================================================== */
+
+/* ----- Importar fuente ----- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+/* ----- Reset y base ----- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #475569;
+    background-color: #ffffff;
+}
+
+/* ----- Contenedor ----- */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ============================================================
+   HEADER - BLANCO
+   ============================================================ */
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 16px 0;
+    background-color: #ffffff;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.12);
+}
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.logo img {
+    height: 48px;
+    width: auto;
+}
+
+/* ----- Navegación ----- */
+.nav {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.nav a {
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: #1e293b;
+    transition: background-color 0.2s, color 0.2s, border-radius 0.2s;
+    padding: 8px 12px;
+    border-radius: 0;
+}
+
+.nav a:hover {
+    color: #1e293b;
+    background-color: #fde68a;
+    border-radius: 6px;
+}
+
+.nav .btn-nav {
+    background-color: transparent;
+    color: #1e293b;
+    padding: 8px 12px;
+    border-radius: 0;
+    font-weight: 500;
+    transition: background-color 0.2s, color 0.2s, border-radius 0.2s;
+}
+
+.nav .btn-nav:hover {
+    color: #1e293b;
+    background-color: #fde68a;
+    border-radius: 6px;
+}
+
+/* ============================================================
+   FOOTER - BLANCO
+   ============================================================ */
+.footer {
+    background-color: #ffffff;
+    color: #475569;
+    padding: 24px 0;
+    margin-top: 64px;
+    box-shadow: 0 -2px 16px rgba(0, 0, 0, 0.12);
+}
+
+.footer .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+.footer .logo-footer {
+    display: flex;
+    align-items: center;
+}
+
+.footer .logo-footer a {
+    display: flex;
+    align-items: center;
+}
+
+.footer .logo-footer img {
+    height: 40px;
+    width: auto;
+}
+
+.footer .social {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.footer .social a {
+    display: inline-block;
+    font-size: 1.5rem;
+    color: #475569;
+    transition: color 0.2s;
+}
+
+.footer .social a:hover {
+    color: #facc10;
+}
+
+/* ============================================================
+   SECCIONES CON EFECTO DE SCROLL (FADE + SLIDE-UP + DELAY)
+   ============================================================ */
+.section {
+    padding: 64px 0;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* El hero NO tiene efecto de entrada (siempre visible) */
+.hero.section {
+    padding: 0;
+    opacity: 1;
+    transform: none;
+    transition: none;
+}
+
+/* El CONTENIDO del hero SÍ tiene efecto de entrada */
+.hero .hero-content {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.hero.section.visible .hero-content {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Delay en cascada para efecto progresivo */
+.section:nth-of-type(1) { transition-delay: 0s; }
+.section:nth-of-type(2) { transition-delay: 0.1s; }
+.section:nth-of-type(3) { transition-delay: 0.2s; }
+.section:nth-of-type(4) { transition-delay: 0.3s; }
+
+/* ============================================================
+   OVERLAY
+   ============================================================ */
+.overlay-dark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(30, 41, 59, 0.85);
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+    position: relative;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    color: white;
+    text-align: center;
+    background-color: #1e293b;
+}
+
+.hero .container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    font-weight: 900;
+    line-height: 1.15;
+    margin-bottom: 16px;
+    color: #facc10;
+}
+
+.hero h1 span {
+    color: #ffffff;
+}
+
+.hero p {
+    font-size: 1.25rem;
+    max-width: 600px;
+    margin: 0 auto 32px auto;
+    color: #ffffff;
+}
+
+.hero .btn-hero {
+    display: inline-block;
+    background-color: #facc10;
+    color: #1e293b;
+    padding: 14px 48px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.hero .btn-hero:hover {
+    background-color: #fde68a;
+}
+
+/* ============================================================
+   SECCIONES GENERALES
+   ============================================================ */
+.section-title {
+    text-align: center;
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: #1e293b;
+    margin-bottom: 8px;
+}
+
+.section-subtitle {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #475569;
+    margin-bottom: 48px;
+}
+
+.section-title .highlight {
+    color: #facc10;
+}
+
+/* ============================================================
+   SECCIÓN COMBINADA (SOBRE + BENEFICIOS)
+   ============================================================ */
+.section-combinada {
+    padding: 64px 0;
+}
+
+.sobre-beneficios-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+}
+
+/* --- Columna Izquierda (Texto) --- */
+.texto-columna p {
+    color: #475569;
+    margin-bottom: 16px;
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+/* Lista de beneficios con palomitas */
+.beneficios-lista {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.beneficio-lista-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #475569;
+    font-size: 1rem;
+}
+
+.beneficio-lista-item i {
+    color: #facc10;
+    font-size: 1.2rem;
+    width: 24px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+/* --- Columna Derecha (Beneficios) --- */
+.beneficios-columna {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.beneficio-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 16px 20px;
+    background-color: #e2e8f0;
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+}
+
+.beneficio-icono i {
+    font-size: 2.5rem;
+    color: #1e293b;
+    width: 4.5rem;
+    text-align: center;
+}
+
+/* Esquina iluminada clara - superior izquierda */
+.beneficio-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(
+        circle at top left,
+        rgba(255, 255, 255, 0.40) 0%,
+        rgba(255, 255, 255, 0) 70%
+    );
+    pointer-events: none;
+    z-index: 0;
+    border-radius: 12px;
+}
+
+/* Esquina iluminada oscura - inferior derecha */
+.beneficio-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(
+        circle at bottom right,
+        rgba(148, 163, 184, 0.20) 0%,
+        rgba(148, 163, 184, 0) 70%
+    );
+    pointer-events: none;
+    z-index: 0;
+    border-radius: 12px;
+}
+
+.beneficio-item .beneficio-icono,
+.beneficio-item .beneficio-contenido {
+    position: relative;
+    z-index: 1;
+}
+
+.beneficio-icono {
+    flex-shrink: 0;
+    width: 4.5rem;
+    height: 4.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.beneficio-contenido h4 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 4px;
+}
+
+.beneficio-contenido p {
+    font-size: 0.9rem;
+    color: #475569;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* ============================================================
+   PRECIOS
+   ============================================================ */
+.precios-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+.precios-grid .precio-card {
+    background: rgba(255, 255, 255, 0.10);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 2px solid rgba(255, 255, 255, 0.45);
+    border-radius: 16px;
+    padding: 32px 24px;
+    text-align: center;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.80);
+    position: relative;
+    color: #ffffff;
+    overflow: hidden;
+}
+
+/* Fallback para Firefox */
+@supports not (backdrop-filter: blur(1px)) {
+    .precios-grid .precio-card {
+        background: rgba(255, 255, 255, 0.25);
+    }
+}
+
+/* Esquina iluminada clara - superior izquierda */
+.precios-grid .precio-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(
+        circle at top left,
+        rgba(255, 255, 255, 0.15) 0%,
+        rgba(255, 255, 255, 0) 70%
+    );
+    pointer-events: none;
+    z-index: 0;
+    border-radius: 16px;
+}
+
+/* Esquina iluminada oscura - inferior derecha */
+.precios-grid .precio-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(
+        circle at bottom right,
+        rgba(0, 0, 0, 0.20) 0%,
+        rgba(0, 0, 0, 0) 70%
+    );
+    pointer-events: none;
+    z-index: 0;
+    border-radius: 16px;
+}
+
+.precios-grid .precio-card .plan,
+.precios-grid .precio-card .nombre,
+.precios-grid .precio-card .detalle,
+.precios-grid .precio-card .precio,
+.precios-grid .precio-card .btn-precio,
+.precios-grid .precio-card .recomendado-hover {
+    position: relative;
+    z-index: 1;
+}
+
+/* Texto "recomendado" en hover */
+.precios-grid .precio-card.destacado .recomendado-hover {
+    position: absolute;
+    top: 13px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #e2e8f0;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.precios-grid .precio-card.destacado:hover .recomendado-hover {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Glow blanco para el recuadro destacado */
+.precios-grid .precio-card.destacado {
+    box-shadow: 
+        0 8px 40px rgba(0, 0, 0, 0.80),
+        0 0 40px rgba(255, 255, 255, 1);
+    border-color: rgba(255, 255, 255, 0.45);
+}
+
+.precios-grid .precio-card .plan {
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 4px;
+}
+
+.precios-grid .precio-card .nombre {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 4px;
+    text-transform: uppercase;
+}
+
+.precios-grid .precio-card .detalle {
+    font-size: 1.15rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 12px;
+}
+
+.precios-grid .precio-card .precio {
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: #facc10;
+}
+
+.precios-grid .precio-card .btn-precio {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 10px 32px;
+    background-color: #facc10;
+    color: #1e293b;
+    border-radius: 6px;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+}
+
+.precios-grid .precio-card .btn-precio:hover {
+    background-color: #fde68a;
+}
+
+/* Títulos de la sección precios sobre fondo oscuro */
+.section-precios-glass .section-title {
+    color: #ffffff;
+}
+
+.section-precios-glass .section-title .highlight {
+    color: #facc10;
+}
+
+.section-precios-glass .section-subtitle {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* ============================================================
+   DETALLES DESPLEGABLE - PLANES
+   ============================================================ */
+.detalles-container {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.5s ease, opacity 0.5s ease, margin 0.5s ease;
+    margin-top: 0;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.30);
+    color: #ffffff;
+    scroll-margin-top: 120px;
+}
+
+.detalles-container.abierto {
+    max-height: 800px;
+    opacity: 1;
+    margin-top: 32px;
+}
+
+.detalles-content {
+    padding: 32px 40px;
+}
+
+.detalles-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+.detalles-header h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.detalles-header h3 span {
+    color: #facc10;
+}
+
+.btn-cerrar-detalles {
+    background: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.btn-cerrar-detalles:hover {
+    background: rgba(255, 255, 255, 0.20);
+    transform: rotate(90deg);
+}
+
+.detalles-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 32px;
+}
+
+.detalle-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.detalle-icono {
+    font-size: 1.25rem;
+    line-height: 1.4;
+    flex-shrink: 0;
+    width: 28px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.detalle-item h4 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 2px;
+}
+
+.detalle-item p {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.65);
+    margin: 0;
+}
+
+.detalles-accion {
+    text-align: center;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.detalles-accion .btn-hero {
+    display: inline-block;
+    background-color: #facc10;
+    color: #1e293b;
+    padding: 12px 40px;
+    border-radius: 8px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.detalles-accion .btn-hero:hover {
+    background-color: #fde68a;
+}
+
+/* ============================================================
+   CONTACTO
+   ============================================================ */
+.contacto-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    background: #e2e8f0;
+    border: 3px solid #ffffff;
+    border-radius: 16px;
+    padding: 56px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Esquina iluminada - superior izquierda */
+.contacto-grid::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(
+        circle at top left,
+        rgba(255, 255, 255, 0.50) 0%,
+        rgba(255, 255, 255, 0) 70%
+    );
+    pointer-events: none;
+    z-index: 0;
+    border-radius: 16px;
+}
+
+/* Esquina iluminada - inferior derecha */
+.contacto-grid::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(
+        circle at bottom right,
+        rgba(148, 163, 184, 0.30) 0%,
+        rgba(148, 163, 184, 0) 70%
+    );
+    pointer-events: none;
+    z-index: 0;
+    border-radius: 16px;
+}
+
+.contacto-grid .contacto-info,
+.contacto-grid .contacto-formulario {
+    position: relative;
+    z-index: 1;
+}
+
+.contacto-info h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 24px;
+}
+
+.contacto-info .item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.contacto-info .item .icon {
+    font-size: 1.25rem;
+    width: 32px;
+    text-align: center;
+    color: #1e293b;
+    transition: color 0.2s;
+}
+
+.contacto-info .item a {
+    color: #1e293b;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.contacto-info .item a:hover {
+    text-decoration: underline;
+    color: #1e293b;
+}
+
+.contacto-formulario h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: #1e293b;
+}
+
+.contacto-formulario input,
+.contacto-formulario textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+    margin-bottom: 12px;
+    transition: border-color 0.2s, background-color 0.2s;
+    background-color: #ffffff;
+    color: #1e293b;
+}
+
+.contacto-formulario input::placeholder,
+.contacto-formulario textarea::placeholder {
+    color: #94a3b8;
+}
+
+.contacto-formulario input:focus,
+.contacto-formulario textarea:focus {
+    outline: none;
+    border-color: #475569;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(71, 85, 105, 0.1);
+}
+
+.contacto-formulario textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.contacto-formulario button {
+    padding: 12px 32px;
+    background-color: #1e293b;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.contacto-formulario button:hover {
+    background-color: #0f172a;
+}
+
+/* ============================================================
+   AJUSTE PARA SCROLL SUAVE CON HEADER FIJO
+   ============================================================ */
+#contacto {
+    scroll-margin-top: 80px;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1024px) {
+    .precios-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.25rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .hero {
+        min-height: 400px;
+    }
+
+    .sobre-beneficios-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+
+    .precios-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .contacto-grid {
+        grid-template-columns: 1fr;
+        padding: 32px;
+    }
+
+    .header .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav {
+        justify-content: center;
+        gap: 4px;
+    }
+
+    .footer .container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 16px;
+    }
+
+    .footer .social {
+        gap: 16px;
+    }
+
+    .section {
+        padding: 48px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .precios-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero {
+        min-height: 300px;
+        padding: 48px 0 64px 0;
+    }
+
+    .hero h1 {
+        font-size: 1.75rem;
+    }
+
+    .hero p {
+        font-size: 0.95rem;
+    }
+
+    .hero .btn-hero {
+        padding: 12px 32px;
+        font-size: 1rem;
+    }
+
+    .section {
+        padding: 40px 0;
+    }
+
+    .section-title {
+        font-size: 1.75rem;
+    }
+
+    .section-subtitle {
+        font-size: 1rem;
+        margin-bottom: 32px;
+    }
+
+    .contacto-grid {
+        padding: 20px;
+    }
+
+    .contacto-info h3,
+    .contacto-formulario h3 {
+        font-size: 1.25rem;
+    }
+
+    .beneficio-item {
+        padding: 12px 16px;
+    }
+
+    .beneficio-icono i {
+        font-size: 2rem;
+        width: 3.5rem;
+    }
+
+    .beneficio-lista-item {
+        font-size: 0.9rem;
+    }
+
+    .beneficio-lista-item i {
+        font-size: 1rem;
+        width: 20px;
+    }
+
+    .nav a {
+        font-size: 0.8rem;
+        padding: 6px 8px;
+    }
+
+    .nav .btn-nav {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+    }
+
+    .footer .social a {
+        font-size: 1.25rem;
+    }
+
+    .footer .social {
+        gap: 12px;
+    }
+
+    .precio-card .btn-precio {
+        padding: 10px 20px;
+        font-size: 0.85rem;
+    }
+
+    .detalles-content {
+        padding: 16px 20px;
+    }
+}
