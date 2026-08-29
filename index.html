@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inglés Superior | Aprende inglés con profesores mexicanos</title>
+    <meta name="description" content="Clases de inglés americano en línea con profesores mexicanos. Cursos individuales y grupales, de A1 a B1. Precios competitivos.">
+
+    <!-- Favicon con letra S en gris casi negro -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' font-weight='bold' fill='%231e293b'>S</text></svg>">
+
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- CSS del sitio web -->
+    <link rel="stylesheet" href="assets/css/style-web.css">
+</head>
+<body>
+
+    <!-- ============================================================
+    HEADER - BLANCO
+    ============================================================ -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="assets/img/logo.png" alt="Inglés Superior - Logo" loading="lazy">
+            </a>
+            <nav class="nav">
+                <a href="#inicio">Inicio</a>
+                <a href="#ofrecemos">Qué ofrecemos</a>
+                <a href="#precios">Planes</a>
+                <a href="#contacto" class="btn-nav">Contacto</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================================
+    HERO - CON EFECTO DE TRANSICIÓN SOLO EN EL CONTENIDO
+    ============================================================ -->
+    <section id="inicio" class="section hero" style="background-image: url('assets/img/2.webp'); background-size: cover; background-position: center;">
+        <div class="overlay-dark"></div>
+        <div class="container" style="position: relative; z-index: 2;">
+            <div class="hero-content">
+                <h1>Aprende inglés americano <br><span>con profesores mexicanos</span></h1>
+                <p>Clases en línea a tu ritmo: clases individuales, flexibles, y para todos los niveles.</p>
+                <a href="#precios" class="btn-hero">Ver planes y precios</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    SECCIÓN COMBINADA: SOBRE NOSOTROS + QUÉ OFRECEMOS
+    ============================================================ -->
+    <section id="ofrecemos" class="section section-combinada" style="background-color: #ffffff;">
+        <div class="container">
+            <!-- Título principal de la sección -->
+            <div class="section-title">
+                <h2>¿Qué es <span class="highlight">Inglés Superior</span> y qué ofrecemos?</h2>
+            </div>
+            <div class="section-subtitle">Creemos en un aprendizaje accesible, práctico, y diseñado para ti.</div>
+
+            <!-- Grid que combina el texto y los beneficios -->
+            <div class="sobre-beneficios-grid">
+                <!-- Lado izquierdo: Texto (Sobre Nosotros) -->
+                <div class="texto-columna">
+                    <p>Aprender inglés no tiene que ser estresante. Nuestro objetivo es ayudarte a alcanzar tus metas con un sistema estructurado pero relajado que no te dé miedo equivocarte (que así aprendemos mejor, a final de cuentas).</p>
+                    <p>En Inglés Superior, tenemos la experiencia y flexibilidad para entender y adaptarnos a tus necesidades.</p>
+
+                    <!-- Lista de beneficios con palomitas -->
+                    <div class="beneficios-lista">
+                        <div class="beneficio-lista-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span><strong>Clases en línea y en vivo</strong></span>
+                        </div>
+                        <div class="beneficio-lista-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span><strong>Horarios flexibles</strong></span>
+                        </div>
+                        <div class="beneficio-lista-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span><strong>Inscripción gratuita y sin contratos, podemos ir mes a mes</strong></span>
+                        </div>
+                        <div class="beneficio-lista-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span><strong>Para todas las edades y niveles</strong></span>
+                        </div>
+                        <div class="beneficio-lista-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span><strong>Diploma con tu nombre al finalizar el curso</strong></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lado derecho: Beneficios en lista -->
+                <div class="beneficios-columna">
+                    <div class="beneficio-item">
+                        <div class="beneficio-icono">
+                            <i class="fas fa-computer"></i>
+                        </div>
+                        <div class="beneficio-contenido">
+                            <h4>100% en línea, horarios flexibles</h4>
+                            <p>Clases en línea (y en vivo) con horarios flexibles para adaptarnos a ti, no tú a nosotros.</p>
+                        </div>
+                    </div>
+                    <div class="beneficio-item">
+                        <div class="beneficio-icono">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <div class="beneficio-contenido">
+                            <h4>Inscripción gratuita</h4>
+                            <p>Sin costos escondidos o contratos forzosos a largo plazo. Podemos ir mes a mes.</p>
+                        </div>
+                    </div>
+                    <div class="beneficio-item">
+                        <div class="beneficio-icono">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="beneficio-contenido">
+                            <h4>Para todas las edades y niveles</h4>
+                            <p>Chico o grande, principiante o avanzado, te ayudamos a alcanzar tus metas (y te llevas tu diploma).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    PRECIOS - CON GLASSMORPHISM, ESQUINAS ILUMINADAS Y DETALLES DESPLEGABLES
+    ============================================================ -->
+    <section id="precios" class="section section-precios-glass" style="background-image: url('assets/img/6.webp'); background-size: cover; background-position: center; background-attachment: fixed; position: relative; padding: 80px 0;">
+        <div class="overlay-dark"></div>
+        
+        <div class="container" style="position: relative; z-index: 2;">
+            <div class="section-title">
+                <h2>Elige el plan que mejor se adapte a <span class="highlight">ti</span></h2>
+            </div>
+            <div class="section-subtitle">Todos los precios son mensuales y en pesos mexicanos (MXN).</div>
+
+            <div class="precios-grid">
+                <!-- Individual regular -->
+                <div class="precio-card">
+                    <div class="plan">Individual</div>
+                    <div class="nombre">Regular</div>
+                    <div class="detalle">16 horas / mes</div>
+                    <div class="precio">$2,500</div>
+                    <a href="#" class="btn-precio btn-detalles" data-plan="individual-regular">Más información</a>
+                </div>
+
+                <!-- Individual intensivo (destacado con glow) -->
+                <div class="precio-card destacado">
+                    <span class="recomendado-hover">recomendado</span>
+                    <div class="plan">Individual</div>
+                    <div class="nombre">Intensivo</div>
+                    <div class="detalle">24 horas / mes</div>
+                    <div class="precio">$3,000</div>
+                    <a href="#" class="btn-precio btn-detalles" data-plan="individual-intensivo">Más información</a>
+                </div>
+
+                <!-- Grupo normal -->
+                <div class="precio-card">
+                    <div class="plan">Grupo (3-5)</div>
+                    <div class="nombre">Regular</div>
+                    <div class="detalle">16 horas / mes</div>
+                    <div class="precio">$1,500</div>
+                    <a href="#" class="btn-precio btn-detalles" data-plan="grupo-regular">Más información</a>
+                </div>
+
+                <!-- Grupo intensivo -->
+                <div class="precio-card">
+                    <div class="plan">Grupo (3-5)</div>
+                    <div class="nombre">Intensivo</div>
+                    <div class="detalle">24 horas / mes</div>
+                    <div class="precio">$2,000</div>
+                    <a href="#" class="btn-precio btn-detalles" data-plan="grupo-intensivo">Más información</a>
+                </div>
+            </div>
+
+            <!-- Sección de detalles (oculta por defecto) -->
+            <div class="detalles-container" id="detalles-container">
+                <div class="detalles-content">
+                    <div class="detalles-header">
+                        <h3><span id="plan-nombre">Individual Regular: 2 clases de 2 horas a la semana</span></h3>
+                        <button class="btn-cerrar-detalles" id="btn-cerrar-detalles" aria-label="Cerrar detalles">✕</button>
+                    </div>
+                    <div class="detalles-body">
+                        <div class="detalles-grid">
+                            <div class="detalle-item">
+                                <span class="detalle-icono"><i class="fas fa-video"></i></span>
+                                <div>
+                                    <h4>Clases en vivo por Teams</h4>
+                                    <p id="detalle-horas">4 horas a la semana.</p>
+                                </div>
+                            </div>
+                            <div class="detalle-item">
+                                <span class="detalle-icono"><i class="fas fa-file-alt"></i></span>
+                                <div>
+                                    <h4>Material en PDF</h4>
+                                    <p>Todo el material que veamos en clase, se te queda.</p>
+                                </div>
+                            </div>
+                            <div class="detalle-item">
+                                <span class="detalle-icono"><i class="fas fa-chart-line"></i></span>
+                                <div>
+                                    <h4>Seguimiento de verdad</h4>
+                                    <p>Exámenes y feedback personalizado para que sepas cómo vas.</p>
+                                </div>
+                            </div>
+                            <div class="detalle-item">
+                                <span class="detalle-icono"><i class="fas fa-comment-dots"></i></span>
+                                <div>
+                                    <h4>Siempre conectados</h4>
+                                    <p>WhatsApp o correo para cuando tengas dudas.</p>
+                                </div>
+                            </div>
+                            <div class="detalle-item">
+                                <span class="detalle-icono"><i class="fas fa-award"></i></span>
+                                <div>
+                                    <h4>Diploma</h4>
+                                    <p>Te entregamos un diploma con tu nombre al finalizar el curso. (No es un certificado oficial.)</p>
+                                </div>
+                            </div>
+                            <div class="detalle-item" id="detalle-grupo">
+                                <span class="detalle-icono"><i class="fas fa-users"></i></span>
+                                <div>
+                                    <h4>Grupos pequeños</h4>
+                                    <p>Para que puedas recibir la atención que mereces.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="detalles-accion">
+                            <a href="#contacto" class="btn-hero">Inscribirme ahora</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    CONTACTO
+    ============================================================ -->
+    <section id="contacto" class="section" style="background-color: #ffffff;">
+        <div class="container">
+            <div class="section-title">
+                <h2>¿Listo para <span class="highlight">empezar</span>?</h2>
+            </div>
+            <div class="section-subtitle">Escríbenos para inscribirte o para aclarar cualquier duda, sin compromiso.</div>
+
+            <div class="contacto-grid">
+                <div class="contacto-info">
+                    <h3>Hablemos por aquí</h3>
+
+                    <div class="item">
+                        <span class="icon"><i class="fas fa-envelope"></i></span>
+                        <a href="mailto:contacto@inglessuperiormx.com">contacto@inglessuperiormx.com</a>
+                    </div>
+                    <div class="item">
+                        <span class="icon"><i class="fab fa-whatsapp"></i></span>
+                        <a href="#">WhatsApp</a>
+                    </div>
+                </div>
+
+                <div class="contacto-formulario">
+                    <h3>O envíanos un mensaje</h3>
+                    <form action="#" method="POST">
+                        <input type="text" placeholder="Tu nombre" required>
+                        <input type="email" placeholder="Tu correo" required>
+                        <input type="text" placeholder="Asunto">
+                        <textarea placeholder="Tu mensaje" required></textarea>
+                        <button type="submit">Enviar mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    FOOTER - BLANCO
+    ============================================================ -->
+    <footer class="footer">
+        <div class="container">
+            <!-- Isotipo con enlace a Inicio -->
+            <div class="logo-footer">
+                <a href="#inicio">
+                    <img src="assets/img/logo-footer.png" alt="Inglés Superior - Logo footer" loading="lazy">
+                </a>
+            </div>
+
+            <!-- Redes sociales -->
+            <div class="social">
+                <a href="#" aria-label="WhatsApp">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="#" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" aria-label="Facebook">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="#" aria-label="Correo">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================================
+    JAVASCRIPT
+    ============================================================ -->
+    <script>
+        // ============================================================
+        // 1. EFECTO DE SCROLL (FADE + SLIDE-UP + DELAY)
+        // ============================================================
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.section');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.01,
+                rootMargin: '0px 0px -30px 0px'
+            });
+
+            sections.forEach(section => observer.observe(section));
+
+            // ============================================================
+            // 2. SECCIÓN DESPLEGABLE DE PLANES
+            // ============================================================
+            const container = document.getElementById('detalles-container');
+            const planNombre = document.getElementById('plan-nombre');
+            const detalleHoras = document.getElementById('detalle-horas');
+            const detalleGrupo = document.getElementById('detalle-grupo');
+            const btnCerrar = document.getElementById('btn-cerrar-detalles');
+
+            // Datos de los planes
+            const planesData = {
+                'individual-regular': {
+                    nombre: 'Individual Regular',
+                    titulo: 'Individual Regular: 2 clases de 2 horas a la semana',
+                    horas: '4 horas a la semana.',
+                    grupo: false
+                },
+                'individual-intensivo': {
+                    nombre: 'Individual Intensivo',
+                    titulo: 'Individual Intensivo: 3 clases de 2 horas a la semana',
+                    horas: '6 horas a la semana.',
+                    grupo: false
+                },
+                'grupo-regular': {
+                    nombre: 'Grupo Regular',
+                    titulo: 'Grupo Regular: 2 clases de 2 horas a la semana',
+                    horas: '4 horas a la semana.',
+                    grupo: true
+                },
+                'grupo-intensivo': {
+                    nombre: 'Grupo Intensivo',
+                    titulo: 'Grupo Intensivo: 3 clases de 2 horas a la semana',
+                    horas: '6 horas a la semana.',
+                    grupo: true
+                }
+            };
+
+            function scrollAlContenedor() {
+                setTimeout(() => {
+                    const headerHeight = document.querySelector('.header').offsetHeight || 80;
+                    // Obtenemos la posición del grid de precios
+                    const preciosGrid = document.querySelector('.precios-grid');
+                    if (preciosGrid) {
+                        // Queremos que el grid de precios quede visible justo debajo del header
+                        // y el contenedor se vea inmediatamente después
+                        const gridPosition = preciosGrid.getBoundingClientRect().top + window.pageYOffset - headerHeight - 10;
+                        window.scrollTo({
+                            top: gridPosition,
+                            behavior: 'smooth'
+                        });
+                    } else {
+                        // Fallback: scrollear al contenedor
+                        const targetPosition = container.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                }, 150);
+            }
+
+            // Función para abrir detalles con el plan seleccionado
+            function abrirDetalles(planId) {
+                const plan = planesData[planId];
+                if (!plan) return;
+
+                planNombre.textContent = plan.titulo;
+                detalleHoras.textContent = plan.horas;
+
+                // Mostrar u ocultar el ítem de "Grupos pequeños"
+                if (plan.grupo) {
+                    detalleGrupo.style.display = 'flex';
+                } else {
+                    detalleGrupo.style.display = 'none';
+                }
+
+                container.style.display = 'block';
+                // Forzar reflow para que la transición funcione
+                void container.offsetHeight;
+                container.classList.add('abierto');
+
+                // Siempre hacer scroll al abrir o cambiar de plan
+                scrollAlContenedor();
+            }
+
+            // Función para cerrar detalles
+            function cerrarDetalles() {
+                container.classList.remove('abierto');
+                container.dataset.planActual = '';
+                setTimeout(() => {
+                    container.style.display = 'none';
+                }, 500);
+            }
+
+            // Evento para cada botón "Más información"
+            document.querySelectorAll('.btn-detalles').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const planId = this.dataset.plan;
+
+                    // Si la sección está abierta y es el mismo plan, la cerramos
+                    if (container.classList.contains('abierto') && container.dataset.planActual === planId) {
+                        cerrarDetalles();
+                        return;
+                    }
+
+                    // Si la sección está abierta pero es otro plan, cambiamos el contenido y hacemos scroll
+                    if (container.classList.contains('abierto')) {
+                        const plan = planesData[planId];
+                        if (!plan) return;
+
+                        planNombre.textContent = plan.titulo;
+                        detalleHoras.textContent = plan.horas;
+
+                        if (plan.grupo) {
+                            detalleGrupo.style.display = 'flex';
+                        } else {
+                            detalleGrupo.style.display = 'none';
+                        }
+
+                        container.dataset.planActual = planId;
+                        // Hacemos scroll para que el usuario vea el cambio
+                        scrollAlContenedor();
+                        return;
+                    }
+
+                    // Si la sección está cerrada, la abrimos
+                    abrirDetalles(planId);
+                    container.dataset.planActual = planId;
+                });
+            });
+
+            // Evento para cerrar con el botón X
+            btnCerrar.addEventListener('click', cerrarDetalles);
+
+            // Evento para cerrar con la tecla ESC
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && container.classList.contains('abierto')) {
+                    cerrarDetalles();
+                }
+            });
+
+            // Evento para cerrar haciendo clic en el overlay (fondo semitransparente)
+            container.addEventListener('click', function(e) {
+                if (e.target === container) {
+                    cerrarDetalles();
+                }
+            });
+
+            // Inicialmente oculto
+            container.style.display = 'none';
+
+            // ============================================================
+            // 3. SCROLL SUAVE CON OFFSET PARA TODOS LOS ENLACES INTERNOS
+            // ============================================================
+            document.querySelectorAll('a[href^="#"]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const targetId = this.getAttribute('href');
+                    // Saltar si es un enlace vacío o solo "#"
+                    if (targetId === '#' || targetId === '') return;
+                    
+                    const target = document.querySelector(targetId);
+                    if (target) {
+                        e.preventDefault();
+                        const headerHeight = document.querySelector('.header').offsetHeight || 80;
+                        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight - 1;
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
