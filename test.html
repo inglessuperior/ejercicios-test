@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test de nivel | Inglés Superior</title>
+    <meta name="description" content="Descubre tu nivel de inglés con nuestro test de nivelación gratuito. A1, A2, B1, B2 o C1." />
+
+    <!-- Favicon con "IS" (Inglés Superior) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text x='5' y='.85em' font-size='72' font-weight='bold' fill='%231e293b' letter-spacing='-2'>IS</text></svg>">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <!-- CSS del test -->
+    <link rel="stylesheet" href="assets/css/test.css" />
+</head>
+<body>
+    <main>
+        <div class="test-wrapper">
+            <!-- Logo -->
+            <div class="logo-mini">
+                <img src="assets/img/logo.png" alt="Inglés Superior" loading="lazy" />
+            </div>
+
+            <!-- INTRO -->
+            <div class="test-intro" id="test-intro">
+                <h1>Descubre tu <span>nivel</span> de inglés</h1>
+                <p>Responde las 25 preguntas. Al final te daremos un nivel estimado de <strong>A1 a C1</strong>.</p>
+                <p class="test-meta"><i class="far fa-clock"></i> Aprox. 7 minutos</p>
+                <button class="btn-hero" id="btn-iniciar">Comenzar test</button>
+            </div>
+
+            <!-- PREGUNTAS -->
+            <div class="test-container" id="test-container" style="display:none;">
+                <div class="test-progress">
+                    <span id="pregunta-numero">1</span> / 25
+                    <div class="barra-progreso"><div class="barra-llenado" id="barra-llenado"></div></div>
+                </div>
+
+                <div class="pregunta-card" id="pregunta-card">
+                    <p class="pregunta-texto" id="pregunta-texto"></p>
+                    <div class="opciones" id="opciones"></div>
+                    <button class="btn-siguiente" id="btn-siguiente" disabled>Siguiente <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- RESULTADO -->
+            <div class="test-resultado" id="test-resultado" style="display:none;">
+                <div class="resultado-card">
+                    <i class="fas fa-award resultado-icono"></i>
+                    <h2>Tu nivel estimado es:</h2>
+                    <div class="nivel-badge" id="nivel-badge">B1</div>
+                    <p class="resultado-desc" id="resultado-desc"></p>
+                    <p class="disclaimer">Esta prueba es una estimación inicial. Para determinar tu nivel real, es necesario evaluar otros aspectos.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="assets/js/test.js"></script>
+</body>
+</html>
