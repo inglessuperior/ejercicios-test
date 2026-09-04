@@ -1,0 +1,452 @@
+/* =================================================================
+   TEST.CSS - Inglés Superior
+   Fondo: gris muy suave (#f1f5f9)
+   Con disclaimer en resultados
+   ================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    height: 100%;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #475569;
+    background-color: #f1f5f9;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+    padding: 40px 20px;
+    background-color: #f1f5f9;
+}
+
+/* ============================================================
+   LOGO (sin enlace)
+   ============================================================ */
+.logo-mini {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.logo-mini img {
+    height: 56px;
+    width: auto;
+}
+
+/* ============================================================
+   WRAPPER
+   ============================================================ */
+.test-wrapper {
+    max-width: 760px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* ============================================================
+   INTRO
+   ============================================================ */
+.test-intro {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.test-intro h1 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #1e293b;
+    margin-bottom: 12px;
+}
+
+.test-intro h1 span {
+    color: #facc10;
+}
+
+.test-intro p {
+    font-size: 1.1rem;
+    color: #475569;
+    max-width: 500px;
+    margin: 0 auto 6px;
+}
+
+.test-meta {
+    font-size: 0.9rem !important;
+    color: #94a3b8 !important;
+    margin-top: 8px !important;
+}
+
+.test-meta i {
+    margin-right: 6px;
+}
+
+.btn-hero {
+    display: inline-block;
+    background-color: #facc10;
+    color: #1e293b;
+    padding: 14px 48px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.2s;
+    margin-top: 20px;
+}
+
+.btn-hero:hover {
+    background-color: #fde68a;
+}
+
+/* ============================================================
+   TEST CONTAINER
+   ============================================================ */
+.test-container {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    border: 2px solid #e2e8f0;
+    width: 100%;
+    min-height: 480px;
+    display: flex;
+    flex-direction: column;
+}
+
+.test-progress {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 28px;
+    font-size: 0.95rem;
+    flex-shrink: 0;
+    width: 100%;
+}
+
+.barra-progreso {
+    flex: 1;
+    height: 6px;
+    background: #e2e8f0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.barra-llenado {
+    height: 100%;
+    width: 0%;
+    background: #facc10;
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+/* ============================================================
+   PREGUNTA CARD
+   ============================================================ */
+.pregunta-card {
+    min-height: 340px;
+    display: flex;
+    flex-direction: column;
+    animation: fadeSlide 0.3s ease;
+    flex: 1;
+    width: 100%;
+}
+
+@keyframes fadeSlide {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.pregunta-texto {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 20px;
+    line-height: 1.5;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    width: 100%;
+}
+
+/* ============================================================
+   OPCIONES - SIN RADIO BUTTON
+   ============================================================ */
+.opciones {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 24px;
+    flex: 1;
+    justify-content: center;
+    min-height: 180px;
+    width: 100%;
+}
+
+.opcion {
+    display: flex;
+    align-items: center;
+    padding: 14px 18px;
+    background: #f8fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s, font-weight 0.2s;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #1e293b;
+    width: 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.opcion:hover {
+    border-color: #94a3b8;
+    background: #f1f5f9;
+}
+
+/* Eliminamos el radio button */
+.opcion input[type="radio"] {
+    display: none;
+}
+
+.opcion.seleccionada {
+    border-color: #64748b;
+    background: #f1f5f9;
+    font-weight: 700;
+}
+
+/* ============================================================
+   BOTÓN SIGUIENTE - ACTIVO CON GRIS OSCURO
+   ============================================================ */
+.btn-siguiente {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 32px;
+    background: #cbd5e1;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s, opacity 0.2s;
+    opacity: 0.5;
+    pointer-events: none;
+    flex-shrink: 0;
+    align-self: flex-start;
+    margin-top: auto;
+}
+
+.btn-siguiente:not(:disabled) {
+    opacity: 1;
+    pointer-events: auto;
+    background: #1e293b;
+}
+
+.btn-siguiente:not(:disabled):hover {
+    background: #0f172a;
+}
+
+.btn-siguiente i {
+    font-size: 0.85rem;
+}
+
+/* ============================================================
+   RESULTADO - AZUL EN VEZ DE AMARILLO
+   ============================================================ */
+.test-resultado {
+    text-align: center;
+}
+
+.resultado-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 48px 40px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    border: 2px solid #e2e8f0;
+    width: 100%;
+}
+
+.resultado-icono {
+    font-size: 4rem;
+    color: #2563eb;
+    margin-bottom: 16px;
+}
+
+.resultado-card h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 16px;
+}
+
+.nivel-badge {
+    display: inline-block;
+    font-size: 4rem;
+    font-weight: 900;
+    color: #2563eb;
+    background: #eff6ff;
+    padding: 8px 40px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    letter-spacing: 2px;
+}
+
+.resultado-desc {
+    font-size: 1.05rem;
+    color: #475569;
+    max-width: 500px;
+    margin: 0 auto 28px;
+}
+
+.disclaimer {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    margin-top: 24px;
+    font-style: italic;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 20px;
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn-reintentar {
+    display: inline-block;
+    background: transparent;
+    color: #475569;
+    border: 2px solid #e2e8f0;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+    margin-top: 20px;
+}
+
+.btn-reintentar:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+}
+
+.btn-reintentar i {
+    margin-right: 8px;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+    .test-intro h1 {
+        font-size: 2rem;
+    }
+
+    .test-container {
+        padding: 24px;
+        min-height: 420px;
+    }
+
+    .pregunta-card {
+        min-height: 300px;
+    }
+
+    .pregunta-texto {
+        font-size: 1.05rem;
+        min-height: 50px;
+    }
+
+    .opciones {
+        min-height: 160px;
+    }
+
+    .resultado-card {
+        padding: 32px 20px;
+    }
+
+    .nivel-badge {
+        font-size: 3rem;
+        padding: 6px 28px;
+    }
+
+    .disclaimer {
+        font-size: 0.8rem;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .test-intro h1 {
+        font-size: 1.6rem;
+    }
+
+    .test-container {
+        padding: 16px;
+        min-height: 380px;
+    }
+
+    .pregunta-card {
+        min-height: 260px;
+    }
+
+    .pregunta-texto {
+        font-size: 0.95rem;
+        min-height: 44px;
+        margin-bottom: 14px;
+    }
+
+    .opciones {
+        min-height: 140px;
+        gap: 8px;
+    }
+
+    .opcion {
+        padding: 12px 14px;
+        font-size: 0.9rem;
+    }
+
+    .btn-hero {
+        padding: 12px 32px;
+        font-size: 1rem;
+    }
+
+    .btn-siguiente {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .logo-mini img {
+        height: 40px;
+    }
+
+    .disclaimer {
+        font-size: 0.75rem;
+        padding-top: 16px;
+        margin-top: 20px;
+    }
+}
