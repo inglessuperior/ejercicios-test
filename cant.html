@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Can't Stop · 2 jugadores</title>
+<style>
+  :root{
+    --bg:#f4f5f7;
+    --panel:#ffffff;
+    --ink:#1c1f26;
+    --ink-soft:#5b6473;
+    --line:#d8dce3;
+    --line-strong:#b9bfc9;
+    --accent:#0b6bcb;
+    --accent-ink:#ffffff;
+    --warn:#c0392b;
+    --ok:#1f8a4c;
+    --p1:#0077b6;
+    --p2:#e07a00;
+    --temp:#f2b705;
+    --closed-bg:#2b2f36;
+    --radius:10px;
+    --shadow:0 1px 2px rgba(0,0,0,.06), 0 4px 12px rgba(0,0,0,.06);
+    --font:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#14171c;
+      --panel:#1c2027;
+      --ink:#e8eaee;
+      --ink-soft:#9aa3b2;
+      --line:#2b313a;
+      --line-strong:#3a424e;
+      --accent:#4a9eff;
+      --accent-ink:#0b0e13;
+      --warn:#ff6b5e;
+      --ok:#4ad07a;
+      --closed-bg:#0f1216;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 4px 12px rgba(0,0,0,.3);
+    }
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:var(--font);
+    background:var(--bg);
+    color:var(--ink);
+    min-height:100vh;
+    min-height:100dvh;
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    padding:16px;
+    line-height:1.4;
+    -webkit-text-size-adjust:100%;
+  }
+  #app{width:100%;max-width:920px}
+
+  /* ---- Tipografía ---- */
+  h1{font-size:clamp(1.3rem,4vw,1.7rem);font-weight:700;letter-spacing:-.02em;margin:0 0 4px}
+  h2{font-size:1rem;font-weight:600;margin:0 0 10px}
+  .muted{color:var(--ink-soft);font-size:.875rem}
+  .small{font-size:.8rem}
+
+  /* ---- Paneles ---- */
+  .panel{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    padding:18px;
+    margin-bottom:14px;
+  }
+
+  /* ---- Formularios ---- */
+  label{display:block;font-size:.8rem;font-weight:600;color:var(--ink-soft);margin-bottom:4px;text-transform:uppercase;letter-spacing:.03em}
+  input[type=text]{
+    width:100%;
+    padding:10px 12px;
+    font:inherit;
+    font-size:1rem;
+    color:var(--ink);
+    background:var(--panel);
+    border:1px solid var(--line-strong);
+    border-radius:8px;
+    outline:none;
+    transition:border-color .15s, box-shadow .15s;
+    -webkit-appearance:none;
+  }
+  input[type=text]:focus{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 20%,transparent)}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media (max-width:520px){.grid-2{grid-template-columns:1fr}}
+
+  /* ---- Botones ---- */
+  button{
+    font:inherit;
+    font-size:.95rem;
+    font-weight:600;
+    padding:11px 16px;
+    border-radius:8px;
+    border:1px solid var(--line-strong);
+    background:var(--panel);
+    color:var(--ink);
+    cursor:pointer;
+    transition:background .12s, border-color .12s, transform .05s;
+    -webkit-tap-highlight-color:transparent;
+    touch-action:manipulation;
+    user-select:none;
+  }
+  button:hover:not(:disabled){background:color-mix(in srgb,var(--ink) 5%,var(--panel))}
+  button:active:not(:disabled){transform:translateY(1px)}
+  button:disabled{opacity:.45;cursor:not-allowed}
+  button.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+  button.primary:hover:not(:disabled){background:color-mix(in srgb,var(--accent) 88%,black)}
+  button.danger{background:transparent;border-color:var(--warn);color:var(--warn)}
+  button.danger:hover:not(:disabled){background:color-mix(in srgb,var(--warn) 10%,transparent)}
+  .btn-row{display:flex;gap:10px;flex-wrap:wrap}
+  .btn-row > button{flex:1 1 auto;min-width:120px}
+
+  /* ---- Cabecera jugadores ---- */
+  .players{
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    gap:10px;
+    align-items:center;
+    margin-bottom:12px;
+  }
+  @media (max-width:600px){
+    .players{grid-template-columns:1fr 1fr;grid-template-areas:"a b" "t t";gap:8px}
+    .players .p1{grid-area:a}
+    .players .p2{grid-area:b}
+    .players .turnbox{grid-area:t}
+  }
+  .pcard{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:8px 12px;
+    border-radius:8px;
+    border:2px solid var(--line);
+    background:var(--panel);
+    min-width:0;
+    transition:border-color .15s, box-shadow .15s;
+  }
+  .pcard.active{border-color:var(--pcolor);box-shadow:0 0 0 3px color-mix(in srgb,var(--pcolor) 25%,transparent)}
+  .pshape{font-size:1.15rem;line-height:1;color:var(--pcolor);flex:0 0 auto}
+  .pname{font-weight:600;font-size:.95rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .pwon{margin-left:auto;font-size:.85rem;color:var(--ink-soft);white-space:nowrap}
+  .turnbox{
+    text-align:center;
+    font-size:.85rem;
+    font-weight:600;
+    color:var(--ink-soft);
+    padding:6px 12px;
+    border-radius:8px;
+    background:var(--bg);
+    border:1px solid var(--line);
+    white-space:nowrap;
+  }
+  .turnbox.active{color:var(--ink)}
+
+  /* ---- Tablero ---- */
+  .board-wrap{overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch}
+  .board{display:flex;gap:6px;justify-content:center;min-width:max-content;padding:2px}
+  .col{display:flex;flex-direction:column;align-items:center;gap:4px}
+  .col-head{font-size:.8rem;font-weight:700;color:var(--ink-soft);width:100%;text-align:center}
+  .cells{display:flex;flex-direction:column-reverse;gap:4px}
+  .cell{
+    width:28px;height:22px;
+    border-radius:5px;
+    border:1.5px solid var(--line);
+    background:var(--bg);
+    display:flex;align-items:center;justify-content:center;
+    font-size:.7rem;
+    transition:background .15s, border-color .15s;
+  }
+  .cell.filled{background:var(--pcolor);border-color:var(--pcolor);color:#fff}
+  .cell.temp{border-color:var(--temp);border-width:2.5px;background:color-mix(in srgb,var(--temp) 22%,var(--panel))}
+  .cell.temp::after{content:"◆";color:var(--temp);font-size:.85rem;line-height:1}
+  .cell.closed{background:var(--closed-bg);border-color:var(--closed-bg);color:#8a929e}
+  .cell.closed::after{content:"×";font-size:.9rem;font-weight:700}
+  @media (max-width:600px){
+    .cell{width:24px;height:20px;border-radius:4px}
+    .col-head{font-size:.7rem}
+  }
+
+  /* ---- Dados y estado ---- */
+  .play-area{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    align-items:flex-start;
+    justify-content:space-between;
+  }
+  .dice-box{flex:1 1 260px;min-width:0}
+  .dice-row{display:flex;gap:8px;align-items:center;margin-bottom:10px}
+  .die{
+    width:44px;height:44px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.8rem;line-height:1;
+    background:var(--panel);
+    border:1.5px solid var(--line-strong);
+    border-radius:8px;
+    color:var(--ink);
+  }
+  .die.rolling{animation:roll .45s ease-out}
+  @keyframes roll{
+    0%{transform:rotate(0) scale(1)}
+    30%{transform:rotate(-18deg) scale(1.12)}
+    60%{transform:rotate(14deg) scale(1.06)}
+    100%{transform:rotate(0) scale(1)}
+  }
+
+  /* ---- Intentos / corredores ---- */
+  .attempts{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:.85rem;
+    color:var(--ink-soft);
+    margin-bottom:10px;
+    flex-wrap:wrap;
+  }
+  .dots{display:flex;gap:5px}
+  .dot{
+    width:14px;height:14px;border-radius:50%;
+    border:2px solid var(--temp);
+    background:transparent;
+    transition:background .15s;
+  }
+  .dot.used{background:var(--temp)}
+  .attempt-label strong{color:var(--ink)}
+
+  /* ---- Opciones de suma ---- */
+  .sums{display:flex;flex-direction:column;gap:8px}
+  .sum-row{
+    display:flex;
+    gap:8px;
+    align-items:stretch;
+    flex-wrap:wrap;
+  }
+  .sum-btn{
+    flex:1 1 auto;
+    min-width:100px;
+    padding:10px 14px;
+    border-radius:8px;
+    border:2px solid var(--line-strong);
+    background:var(--panel);
+    font-weight:700;
+    font-size:1.05rem;
+    color:var(--ink);
+    cursor:pointer;
+    transition:border-color .12s, background .12s;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .sum-btn small{font-weight:500;font-size:.72rem;color:var(--ink-soft);display:block;line-height:1.1}
+  .sum-btn:hover:not(:disabled){border-color:var(--accent)}
+  .sum-btn:disabled{opacity:.35;cursor:not-allowed}
+  .sum-btn.chosen{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,var(--panel))}
+  .sum-btn .sumval{font-size:1.15rem}
+
+  /* ---- Barra de acciones ---- */
+  .actions{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:14px;
+  }
+  .actions > button{flex:1 1 140px}
+
+  /* ---- Status ---- */
+  .status{
+    margin-top:12px;
+    padding:10px 12px;
+    border-radius:8px;
+    font-size:.9rem;
+    background:var(--bg);
+    border:1px solid var(--line);
+    color:var(--ink-soft);
+    min-height:40px;
+    display:flex;
+    align-items:center;
+  }
+  .status strong{color:var(--ink)}
+
+  /* ---- Reglas ---- */
+  .rules{font-size:.85rem;color:var(--ink-soft);line-height:1.55}
+  .rules b{color:var(--ink)}
+  .rules ul{margin:6px 0 0;padding-left:18px}
+  .rules li{margin-bottom:2px}
+
+  /* ---- Confeti ---- */
+  .confetti-layer{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:99}
+  .confetti{position:absolute;width:8px;height:12px;border-radius:2px;animation:fall linear forwards}
+  @keyframes fall{
+    0%{transform:translateY(-20px) rotate(0);opacity:1}
+    100%{transform:translateY(105vh) rotate(540deg);opacity:.2}
+  }
+
+  /* ---- Utilidades ---- */
+  .hidden{display:none !important}
+  .mt{margin-top:10px}
+  .flex-between{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important;transition:none !important}
+  }
+</style>
+</head>
+<body>
+<div id="app">
+
+  <!-- ============ LOBBY ============ -->
+  <section id="lobby" class="panel">
+    <h1>Can't Stop</h1>
+    <p class="muted" style="margin:0 0 16px">Juego de dados para 2 jugadores · en línea</p>
+
+    <div class="grid-2" style="margin-bottom:14px">
+      <div>
+        <label for="playerName">Tu nombre</label>
+        <input id="playerName" type="text" maxlength="20" placeholder="Ej: Ana" autocomplete="off">
+      </div>
+      <div>
+        <label for="roomCode">Código de sala</label>
+        <input id="roomCode" type="text" maxlength="12" placeholder="Ej: ABC123" autocomplete="off" autocapitalize="characters">
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button id="createBtn" class="primary">Crear sala</button>
+      <button id="joinBtn">Unirme</button>
+    </div>
+
+    <div id="lobbyStatus" class="status mt">Ingresá tu nombre y un código para empezar.</div>
+
+    <div class="rules mt" style="border-top:1px solid var(--line);padding-top:14px">
+      <b>Cómo se juega</b>
+      <ul>
+        <li>Hay 11 columnas (2 a 12) con distinta altura. Tirás 4 dados y formás 2 parejas: obtenés 2 sumas por combinación.</li>
+        <li>Avanzás hasta <b>3 corredores temporales</b> por turno. Si no podés avanzar con ninguna suma, <b>te pasás</b> y perdés todo lo temporal.</li>
+        <li>Después de cada avance elegís <b>Seguir</b> (tirar de nuevo) o <b>Plantarte</b> (fijar el avance).</li>
+        <li>Al llegar a la cima de una columna, esa columna se cierra para ambos. Gana quien cierre <b>3 columnas</b>.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ JUEGO ============ -->
+  <section id="game" class="panel hidden">
+    <div class="players">
+      <div class="pcard p1" id="p1Card">
+        <span class="pshape" id="p1Shape">●</span>
+        <span class="pname" id="p1Name">Jugador 1</span>
+        <span class="pwon" id="p1Won">0/3</span>
+      </div>
+      <div class="turnbox" id="turnBox">—</div>
+      <div class="pcard p2" id="p2Card">
+        <span class="pshape" id="p2Shape">■</span>
+        <span class="pname" id="p2Name">Jugador 2</span>
+        <span class="pwon" id="p2Won">0/3</span>
+      </div>
+    </div>
+
+    <div class="board-wrap">
+      <div class="board" id="board"></div>
+    </div>
+
+    <div class="play-area mt">
+      <div class="dice-box">
+        <div class="dice-row">
+          <span class="die" id="d0">⚀</span>
+          <span class="die" id="d1">⚀</span>
+          <span class="die" id="d2">⚀</span>
+          <span class="die" id="d3">⚀</span>
+        </div>
+        <div class="attempts">
+          <span class="attempt-label">Intentos: <strong id="attemptsText">0 / 3</strong></span>
+          <span class="dots" id="attemptDots">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          </span>
+        </div>
+      </div>
+      <div style="flex:1 1 300px;min-width:0">
+        <div class="sums" id="sums"></div>
+        <div class="actions">
+          <button id="rollBtn" class="primary">Tirar dados</button>
+          <button id="stopBtn">Plantarme</button>
+          <button id="rematchBtn" class="hidden">Revancha</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="gameStatus" class="status">Conectando…</div>
+  </section>
+</div>
+
+<div class="confetti-layer" id="confettiLayer"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js"></script>
+<script>
+(function(){
+  "use strict";
+
+  // ============ CONSTANTES ============
+  const COLUMNS = [2,3,4,5,6,7,8,9,10,11,12];
+  const LEN = {2:3,3:5,4:7,5:9,6:11,7:13,8:11,9:9,10:7,11:5,12:3};
+  const WIN_COLS = 3;
+  const MAX_TEMP = 3;
+  const PEER_PREFIX = "nopares-";
+  const DICE_CHARS = ["⚀","⚁","⚂","⚃","⚄","⚅"];
+
+  // Pool de colores: vivos, distinguibles, uno siempre cian.
+  // Se eligen 2 distintos al azar al crear partida (y en cada revancha).
+  const COLOR_POOL = [
+    { name:"cian",    value:"#00b5c4" }, // cian (siempre disponible)
+    { name:"coral",   value:"#e8543f" },
+    { name:"violeta", value:"#8e5bd4" },
+    { name:"lima",    value:"#3fa34d" },
+    { name:"ámbar",   value:"#d98b00" },
+    { name:"rosa",    value:"#d94a8c" }
+  ];
+  const SHAPES = ["●","■"]; // círculo y cuadrado
+
+  // ============ ESTADO ============
+  let peer=null, conn=null, isHost=false, myRole=null, roomCode="", playerName="";
+  let gameState=null;
+
+  // Para la UI: índice de opción elegida cuando hay elección forzosa
+  let forcedChoiceIdx = null;
+
+  // ============ DOM ============
+  const $ = id => document.getElementById(id);
+  const lobbyEl=$("lobby"), gameEl=$("game");
+  const nameIn=$("playerName"), codeIn=$("roomCode");
+  const createBtn=$("createBtn"), joinBtn=$("joinBtn");
+  const lobbyStatus=$("lobbyStatus"), gameStatus=$("gameStatus");
+  const boardEl=$("board"), sumsEl=$("sums");
+  const diceEls=[$("d0"),$("d1"),$("d2"),$("d3")];
+  const attemptsText=$("attemptsText"), attemptDots=$("attemptDots").children;
+  const rollBtn=$("rollBtn"), stopBtn=$("stopBtn"), rematchBtn=$("rematchBtn");
+  const p1Card=$("p1Card"), p2Card=$("p2Card");
+  const p1Name=$("p1Name"), p2Name=$("p2Name");
+  const p1Shape=$("p1Shape"), p2Shape=$("p2Shape");
+  const p1Won=$("p1Won"), p2Won=$("p2Won");
+  const turnBox=$("turnBox");
+  const confettiLayer=$("confettiLayer");
+
+  // ============ ESTADO INICIAL ============
+  function pickColors(){
+    // Mezclar pool, tomar 2
+    const pool=[...COLOR_POOL];
+    for(let i=pool.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]];}
+    return [pool[0].value, pool[1].value];
+  }
+  function pickShapes(){
+    return Math.random()<0.5 ? [SHAPES[0],SHAPES[1]] : [SHAPES[1],SHAPES[0]];
+  }
+  function createInitialState(n1,n2){
+    const [c1,c2]=pickColors();
+    const [s1,s2]=pickShapes();
+    return {
+      players:{
+        p1:{name:n1||"Jugador 1", color:c1, shape:s1, won:0},
+        p2:{name:n2||"Jugador 2", color:c2, shape:s2, won:0}
+      },
+      turn:"p1",
+      // estado del tablero
+      permanent: Object.fromEntries(COLUMNS.map(c=>[c,0])),
+      // dueño de cada ficha permanente (array por columna con 'p1'/'p2' o null)
+      owners: Object.fromEntries(COLUMNS.map(c=>[c,Array(LEN[c]).fill(null)])),
+      closed: Object.fromEntries(COLUMNS.map(c=>[c,false])),
+      closedBy: Object.fromEntries(COLUMNS.map(c=>[c,null])),
+      // corredores temporales: array de {col, pos}
+      temp: [],
+      // dados y sumas
+      dice:[1,1,1,1],
+      sums:[],        // array de {a,b} (3 opciones)
+      valid: [],      // array de booleanos por opción
+      phase: "idle",  // idle | rolled | choice | bust | win
+      winner:null,
+      msg:""
+    };
+  }
+
+  // ============ LÓGICA ============
+  function roll4(){
+    return [0,0,0,0].map(()=>1+Math.floor(Math.random()*6));
+  }
+  function pairings(d){
+    const [a,b,c,d2]=d;
+    return [
+      {a:a+b, b:c+d2},
+      {a:a+c, b:b+d2},
+      {a:a+d2,b:b+c}
+    ];
+  }
+  // ¿Se puede avanzar la suma `s`? Devuelve true/false
+  function canAdvance(st, s){
+    if(!COLUMNS.includes(s)) return false;
+    if(st.closed[s]) return false;
+    const len=LEN[s];
+    if(st.permanent[s] >= len) return false; // llena
+    const t=st.temp.find(t=>t.col===s);
+    if(t){
+      // ya hay corredor temporal aquí: puede avanzar si no está en la cima
+      return t.pos < len;
+    } else {
+      // no hay corredor: se puede crear si quedan intentos y hay espacio
+      if(st.temp.length >= MAX_TEMP) return false;
+      return st.permanent[s] < len;
+    }
+  }
+  // Aplicar avance de la suma `s` (asume válido)
+  function advance(st, s){
+    const len=LEN[s];
+    const t=st.temp.find(t=>t.col===s);
+    if(t){
+      t.pos = Math.min(t.pos+1, len);
+    } else {
+      st.temp.push({col:s, pos: st.permanent[s]+1});
+    }
+  }
+  // ¿Algún corredor temporal llegó a la cima?
+  function tempTop(st){
+    for(const t of st.temp){
+      if(t.pos >= LEN[t.col]) return t.col;
+    }
+    return null;
+  }
+  // Consolidar temporales -> permanentes, cerrar columnas, comprobar victoria, cambiar turno
+  function consolidate(st, player){
+    // Por columna, la posición más alta alcanzada
+    const best={};
+    for(const t of st.temp){
+      if(!best[t.col] || t.pos>best[t.col]) best[t.col]=t.pos;
+    }
+    for(const col in best){
+      const c=parseInt(col,10);
+      const pos=best[c];
+      if(pos>st.permanent[c]){
+        // Asignar dueño a cada nueva casilla
+        for(let i=st.permanent[c]; i<pos; i++){
+          st.owners[c][i]=player;
+        }
+        st.permanent[c]=pos;
+      }
+    }
+    // Cerrar columnas llenas
+    for(const c of COLUMNS){
+      if(!st.closed[c] && st.permanent[c]>=LEN[c]){
+        st.closed[c]=true;
+        st.closedBy[c]=player;
+        st.players[player].won++;
+      }
+    }
+    // Limpiar temporales
+    st.temp=[];
+    // ¿Victoria?
+    if(st.players[player].won>=WIN_COLS){
+      st.winner=player;
+      st.phase="win";
+      return;
+    }
+    // Pasar turno
+    st.turn = st.turn==="p1" ? "p2" : "p1";
+    st.phase="idle";
+    st.dice=[1,1,1,1];
+    st.sums=[];
+    st.valid=[];
+    forcedChoiceIdx=null;
+    st.msg="";
+  }
+  // Te pasas
+  function bust(st){
+    st.temp=[];
+    st.turn = st.turn==="p1" ? "p2" : "p1";
+    st.phase="idle";
+    st.dice=[1,1,1,1];
+    st.sums=[];
+    st.valid=[];
+    forcedChoiceIdx=null;
+    st.msg="Te pasaste.";
+  }
+
+  // ============ RENDER ============
+  function render(){
+    if(!gameState){ return; }
+    const st=gameState;
+
+    // Nombres, colores, formas, marcador
+    p1Name.textContent = st.players.p1.name;
+    p2Name.textContent = st.players.p2.name;
+    p1Shape.textContent = st.players.p1.shape;
+    p2Shape.textContent = st.players.p2.shape;
+    p1Shape.style.color = st.players.p1.color;
+    p2Shape.style.color = st.players.p2.color;
+    p1Won.textContent = st.players.p1.won + "/3";
+    p2Won.textContent = st.players.p2.won + "/3";
+    p1Card.style.setProperty("--pcolor", st.players.p1.color);
+    p2Card.style.setProperty("--pcolor", st.players.p2.color);
+
+    const isMyTurn = (myRole===st.turn) && !st.winner;
+    p1Card.classList.toggle("active", st.turn==="p1" && !st.winner);
+    p2Card.classList.toggle("active", st.turn==="p2" && !st.winner);
+    p1Card.style.setProperty("--pcolor", st.players.p1.color);
+    p2Card.style.setProperty("--pcolor", st.players.p2.color);
+
+    // Turno
+    if(st.winner){
+      turnBox.textContent = "Ganó " + st.players[st.winner].name;
+      turnBox.style.color = st.players[st.winner].color;
+      turnBox.classList.add("active");
+    } else {
+      turnBox.textContent = (isMyTurn?"Tu turno":"Turno de " + st.players[st.turn].name);
+      turnBox.style.color = "";
+      turnBox.classList.toggle("active", isMyTurn);
+    }
+
+    // Tablero
+    boardEl.innerHTML="";
+    for(const c of COLUMNS){
+      const col=document.createElement("div");
+      col.className="col";
+      const head=document.createElement("div");
+      head.className="col-head";
+      head.textContent=c;
+      col.appendChild(head);
+      const cells=document.createElement("div");
+      cells.className="cells";
+      const perm=st.permanent[c];
+      const closed=st.closed[c];
+      const tempHere=st.temp.find(t=>t.col===c);
+      for(let i=1;i<=LEN[c];i++){
+        const cell=document.createElement("div");
+        cell.className="cell";
+        if(closed){
+          cell.classList.add("closed");
+          // tinte del color del ganador
+          const owner=st.closedBy[c];
+          if(owner){
+            const col=st.players[owner].color;
+            cell.style.background = col;
+            cell.style.borderColor = col;
+          }
+        } else if(i<=perm){
+          // ficha permanente: color del dueño de esa casilla
+          const owner=st.owners[c][i-1];
+          cell.classList.add("filled");
+          if(owner){
+            const col=st.players[owner].color;
+            cell.style.background=col;
+            cell.style.borderColor=col;
+          }
+        }
+        if(tempHere && i===tempHere.pos){
+          // corredor temporal (rombo amarillo)
+          cell.classList.add("temp");
+        }
+        cells.appendChild(cell);
+      }
+      col.appendChild(cells);
+      boardEl.appendChild(col);
+    }
+
+    // Dados
+    for(let i=0;i<4;i++){
+      const v=st.dice[i]||1;
+      diceEls[i].textContent = DICE_CHARS[v-1];
+    }
+
+    // Intentos
+    const used=st.temp.length;
+    attemptsText.textContent = used + " / " + MAX_TEMP;
+    for(let i=0;i<MAX_TEMP;i++){
+      attemptDots[i].classList.toggle("used", i<used);
+    }
+
+    // Opciones de suma
+    sumsEl.innerHTML="";
+    if(st.phase==="rolled" || st.phase==="choice"){
+      if(st.sums && st.sums.length){
+        st.sums.forEach((opt, idx)=>{
+          const valid=st.valid[idx];
+          const row=document.createElement("div");
+          row.className="sum-row";
+          // Mostrar las dos sumas como botones separados para elegir cuál avanzar
+          [opt.a, opt.b].forEach((sum, k)=>{
+            const b=document.createElement("button");
+            b.className="sum-btn";
+            b.type="button";
+            const can=canAdvance(st, sum);
+            b.disabled = !valid || !can;
+            if(forcedChoiceIdx===idx) b.classList.add("chosen");
+            b.innerHTML = `<span class="sumval">${sum}</span>`;
+            b.onclick = ()=> onSumClick(sum);
+            row.appendChild(b);
+          });
+          sumsEl.appendChild(row);
+        });
+      }
+    } else if(st.phase==="idle"){
+      // nada
+    } else if(st.phase==="bust"){
+      sumsEl.innerHTML = '<div class="muted small">Te pasaste. Cambiando turno…</div>';
+    }
+
+    // Botones
+    rollBtn.disabled = !isMyTurn || st.phase!=="idle";
+    stopBtn.disabled = !isMyTurn || !(st.temp.length>0);
+    rollBtn.classList.toggle("hidden", !!st.winner);
+    stopBtn.classList.toggle("hidden", !!st.winner);
+    rematchBtn.classList.toggle("hidden", !st.winner);
+
+    // Status
+    if(st.winner){
+      gameStatus.innerHTML = `🏆 <strong>${st.players[st.winner].name}</strong> ganó la partida.`;
+    } else if(st.phase==="bust"){
+      gameStatus.textContent = "💥 Te pasaste. Cambiando turno…";
+    } else if(isMyTurn){
+      if(st.phase==="idle"){
+        if(st.temp.length===0){
+          gameStatus.textContent = "Tu turno. Tirá los dados.";
+        } else {
+          gameStatus.textContent = "Podés seguir tirando o plantarte para fijar el avance.";
+        }
+      } else if(st.phase==="rolled"){
+        gameStatus.textContent = "Elegí una suma para avanzar.";
+      } else if(st.phase==="choice"){
+        gameStatus.textContent = "Elegí cuál de las dos columnas nuevas querés avanzar.";
+      }
+    } else {
+      gameStatus.textContent = "Esperando a " + st.players[st.turn].name + "…";
+    }
+
+    // Animación de dados si acaba de tirar
+    // (se hace en doRoll)
+  }
+
+  // ============ ACCIONES ============
+  function onSumClick(sum){
+    if(!gameState) return;
+    if(myRole!==gameState.turn) return;
+    if(gameState.phase!=="rolled" && gameState.phase!=="choice") return;
+    if(!canAdvance(gameState, sum)) return;
+
+    advance(gameState, sum);
+
+    // ¿Llegó a la cima?
+    const top=tempTop(gameState);
+    if(top!==null){
+      // El jugador puede seguir o plantarse. Pasamos a idle para que elija.
+    }
+
+    // Después de avanzar, el jugador puede:
+    //  - Seguir (tirar de nuevo) si aún puede
+    //  - Plantarse
+    // Pasamos a fase idle
+    gameState.phase="idle";
+    gameState.dice=[1,1,1,1];
+    gameState.sums=[];
+    gameState.valid=[];
+    forcedChoiceIdx=null;
+    gameState.msg="Suma " + sum + " avanzada.";
+    render();
+    sendState();
+  }
+
+  function doRoll(){
+    if(!gameState) return;
+    if(myRole!==gameState.turn) return;
+    if(gameState.phase!=="idle") return;
+
+    const dice=roll4();
+    gameState.dice=dice;
+
+    // Animación de dados
+    diceEls.forEach(el=>{
+      el.classList.remove("rolling");
+      void el.offsetWidth;
+      el.classList.add("rolling");
+    });
+
+    const pairs=pairings(dice);
+    gameState.sums=pairs;
+
+    // Calcular validez de cada opción: es válida si al menos una de sus dos sumas puede avanzar
+    gameState.valid = pairs.map(p => canAdvance(gameState, p.a) || canAdvance(gameState, p.b));
+
+    const anyValid = gameState.valid.some(v=>v);
+    if(!anyValid){
+      // Te pasas
+      gameState.phase="bust";
+      gameState.msg="No hay movimientos válidos. Te pasaste.";
+      render();
+      sendState();
+      setTimeout(()=>{
+        if(!gameState) return;
+        if(gameState.phase!=="bust") return;
+        bust(gameState);
+        render();
+        sendState();
+      }, 1400);
+      return;
+    }
+
+    // ¿Elección forzosa? Si queda exactamente 1 intento libre y ambas sumas de alguna opción son columnas nuevas
+    const freeSlots = MAX_TEMP - gameState.temp.length;
+    if(freeSlots===1){
+      // Buscar opciones válidas donde ambas sumas sean columnas nuevas (sin corredor temporal)
+      const newColOptions = pairs.filter((p,idx)=>{
+        if(!gameState.valid[idx]) return false;
+        const hasTemp1 = gameState.temp.some(t=>t.col===p.a);
+        const hasTemp2 = gameState.temp.some(t=>t.col===p.b);
+        return !hasTemp1 && !hasTemp2;
+      });
+      if(newColOptions.length>0){
+        // Forzar elección: solo mostramos esas opciones, y el jugador debe elegir una suma
+        // Reducimos sums a solo esas opciones y pedimos elección
+        gameState.sums = newColOptions;
+        gameState.valid = newColOptions.map(()=>true);
+        gameState.phase="choice";
+        forcedChoiceIdx=null;
+        render();
+        sendState();
+        return;
+      }
+    }
+
+    gameState.phase="rolled";
+    render();
+    sendState();
+  }
+
+  function doStop(){
+    if(!gameState) return;
+    if(myRole!==gameState.turn) return;
+    if(gameState.temp.length===0) return;
+    if(gameState.winner) return;
+
+    consolidate(gameState, myRole);
+    // Si consolidate cambió a win, ya queda en phase win
+    if(gameState.phase!=="win"){
+      gameState.msg="Te plantaste.";
+    }
+    render();
+    sendState();
+    if(gameState.winner) launchConfetti();
+  }
+
+  // ============ COMUNICACIÓN ============
+  function sendState(){
+    if(conn && conn.open && gameState){
+      try{ conn.send({type:"state", state: gameState}); }catch(e){}
+    }
+  }
+
+  function handleData(data){
+    if(!data) return;
+    if(data.type==="state"){
+      gameState=data.state;
+      render();
+      if(gameState.winner && !window._celebrated){
+        window._celebrated=true;
+        launchConfetti();
+      } else if(!gameState.winner){
+        window._celebrated=false;
+      }
+    } else if(data.type==="rematch"){
+      if(isHost){
+        const n1=gameState?gameState.players.p1.name:"Jugador 1";
+        const n2=gameState?gameState.players.p2.name:"Jugador 2";
+        gameState=createInitialState(n1,n2);
+        window._celebrated=false;
+        render(); sendState();
+      }
+    } else if(data.type==="hello"){
+      if(isHost && gameState && data.name){
+        // Actualizar nombre del invitado (p2)
+        gameState.players.p2.name=data.name;
+        render(); sendState();
+      }
+    }
+  }
+
+  // ============ CONEXIÓN ============
+  function startHost(code){
+    isHost=true; myRole="p1"; roomCode=code;
+    const peerId=PEER_PREFIX+code;
+    try{ peer=new Peer(peerId,{debug:1}); }catch(e){
+      lobbyStatus.textContent="Error al crear Peer: "+e.message;
+      createBtn.disabled=false; joinBtn.disabled=false;
+      return;
+    }
+    peer.on("open",()=>{
+      lobbyStatus.textContent="Sala creada. Pasale el código «"+code+"» a tu hermano. Esperando conexión…";
+      createBtn.disabled=true; joinBtn.disabled=true;
+    });
+    peer.on("connection",(c)=>{
+      if(conn){ c.close(); return; }
+      conn=c;
+      conn.on("open",()=>{
+        // Iniciar juego
+        gameState=createInitialState(playerName||"Jugador 1","Jugador 2");
+        gameState.msg="Conectado.";
+        lobbyEl.classList.add("hidden");
+        gameEl.classList.remove("hidden");
+        render();
+        // Preguntar nombre al invitado
+        try{ conn.send({type:"hello", name:playerName}); }catch(e){}
+        sendState();
+      });
+      conn.on("data", handleData);
+      conn.on("close",()=>{
+        gameStatus.textContent="🔌 Conexión perdida. Recargá la página para volver a empezar.";
+        conn=null;
+      });
+      conn.on("error",(err)=>{ gameStatus.textContent="Error de conexión: "+err; });
+    });
+    peer.on("error",(err)=>{
+      lobbyStatus.textContent="Error: "+err.message;
+      createBtn.disabled=false; joinBtn.disabled=false;
+    });
+  }
+
+  function startJoin(code){
+    isHost=false; myRole="p2"; roomCode=code;
+    const peerId=PEER_PREFIX+code;
+    try{ peer=new Peer(null,{debug:1}); }catch(e){
+      lobbyStatus.textContent="Error al crear Peer: "+e.message;
+      return;
+    }
+    peer.on("open",()=>{
+      conn=peer.connect(peerId,{reliable:true});
+      conn.on("open",()=>{
+        lobbyEl.classList.add("hidden");
+        gameEl.classList.remove("hidden");
+        gameStatus.textContent="Conectado. Esperando al host…";
+        try{ conn.send({type:"hello", name:playerName}); }catch(e){}
+      });
+      conn.on("data", handleData);
+      conn.on("close",()=>{
+        gameStatus.textContent="🔌 Conexión perdida. Recargá la página para volver a empezar.";
+      });
+      conn.on("error",(err)=>{ gameStatus.textContent="Error: "+err; });
+    });
+    peer.on("error",(err)=>{
+      lobbyStatus.textContent="Error: "+err.message;
+      joinBtn.disabled=false;
+    });
+  }
+
+  // ============ CONFETI ============
+  function launchConfetti(){
+    if(window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const colors=["#00b5c4","#e8543f","#8e5bd4","#3fa34d","#d98b00","#d94a8c"];
+    for(let i=0;i<28;i++){
+      const el=document.createElement("div");
+      el.className="confetti";
+      el.style.left=(Math.random()*100)+"%";
+      el.style.background=colors[Math.floor(Math.random()*colors.length)];
+      el.style.animationDuration=(2+Math.random()*1.8)+"s";
+      el.style.animationDelay=(Math.random()*0.8)+"s";
+      el.style.transform="rotate("+Math.floor(Math.random()*360)+"deg)";
+      confettiLayer.appendChild(el);
+      setTimeout(()=>el.remove(), 5000);
+    }
+  }
+
+  // ============ EVENTOS UI ============
+  createBtn.onclick=()=>{
+    playerName=(nameIn.value||"").trim() || "Jugador 1";
+    const code=(codeIn.value||"").trim().toUpperCase();
+    if(code.length<3){ lobbyStatus.textContent="El código debe tener al menos 3 caracteres."; return; }
+    startHost(code);
+  };
+  joinBtn.onclick=()=>{
+    playerName=(nameIn.value||"").trim() || "Jugador 2";
+    const code=(codeIn.value||"").trim().toUpperCase();
+    if(code.length<3){ lobbyStatus.textContent="El código debe tener al menos 3 caracteres."; return; }
+    startJoin(code);
+  };
+  rollBtn.onclick=doRoll;
+  stopBtn.onclick=doStop;
+  rematchBtn.onclick=()=>{
+    if(isHost){
+      const n1=gameState?gameState.players.p1.name:"Jugador 1";
+      const n2=gameState?gameState.players.p2.name:"Jugador 2";
+      gameState=createInitialState(n1,n2);
+      window._celebrated=false;
+      render(); sendState();
+    } else if(conn && conn.open){
+      conn.send({type:"rematch"});
+    }
+  };
+
+  // Enter en inputs dispara la acción correspondiente
+  nameIn.addEventListener("keydown",e=>{ if(e.key==="Enter") codeIn.focus(); });
+  codeIn.addEventListener("keydown",e=>{
+    if(e.key==="Enter"){
+      if(createBtn.disabled) joinBtn.click(); else createBtn.click();
+    }
+  });
+
+  // Estado inicial visual
+  lobbyEl.classList.remove("hidden");
+  gameEl.classList.add("hidden");
+
+})();
+</script>
+</body>
+</html>
